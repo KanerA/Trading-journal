@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .tabContainer {
     margin-top: 0.5rem;
     display: 100%;
@@ -9,7 +11,12 @@
     margin: auto;
 }
 
-.tabContainer button {
+.tabButton  {
     flex: 1;
     padding: 0.7rem;
+    background-color: $bg-layover;
+    cursor: pointer;
+}
+ .selected {
+    background-color: #80a6f8;
 }
