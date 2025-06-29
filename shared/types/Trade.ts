@@ -1,7 +1,9 @@
+import type { Outcome } from "./Outcome";
+
 export type Trade = {
     ticker: string;
     status: 'Closed' | 'Open';
-    outcome: 'winner' | 'loser';
+    outcome: Outcome;
     entryPrice: number;
     entryDate: string;
     amount: number;

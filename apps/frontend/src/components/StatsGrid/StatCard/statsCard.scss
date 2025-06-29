@@ -1,7 +1,19 @@
 @import "../../../styles/variables.scss";
 
 .statCard {
-    height: 5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 7rem;
     background-color: $bg-layover;
-    padding: 0.2rem 0 0 0.2rem; 
+    padding: 0.2rem 2rem;
+    border-radius: 10px;
+    > .statCardLabel{
+        margin-bottom: 1rem;
+    }
+
+    > .statCardValue {
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
 }
