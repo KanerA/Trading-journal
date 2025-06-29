@@ -6,11 +6,11 @@ type StatCardProps = {
     valueClass?: string;
 };
 
-export default function StatCard({ label, value }: StatCardProps) {
+export default function StatCard({ label, value, valueClass = "" }: StatCardProps) {
     return (
         <div className="statCard">
-            <div>{label}</div>
-            <div>{value}</div>
+            <div className="statCardLabel">{label}</div>
+            <div className={`statCardValue ${valueClass}`}>{value}</div>
         </div >
     );
 }

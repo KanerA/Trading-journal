@@ -11,7 +11,7 @@ const TradeCardHeader = ({ outcome, status, ticker }: TradeCardHeaderProps) => {
             <div className="tradeCardTitle">
                 <h2>{ticker}</h2>
                 <div className="cardStatus">{status}</div>
-                <div className={`cardOutcome ${outcome === "winner" ? "winnerOutcome" : "loserOutcome"}`}>{outcome}</div>
+                <div className={`cardOutcome ${outcome === "winner" ? "winnerBackground" : "loserBackground"}`}>{outcome}</div>
             </div>
             <div className="tradeCardActionButtons">
                 <button >✏️</button>

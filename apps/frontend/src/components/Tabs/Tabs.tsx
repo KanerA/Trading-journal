@@ -11,14 +11,13 @@ interface TabsProps {
 export default function Tabs({ trades }: TabsProps) {
     const [displaySectionSelector, setDisplaySectionSelector] = useState<"trades" | "analytics">("trades");
 
-
     return (
         <div className="tabContainer">
             <div className="tabButtonContainer">
-                <button onClick={() => setDisplaySectionSelector('trades')}>
+                <button className={`tabButton ${displaySectionSelector === "trades" ? "selected" : ""}`} onClick={() => setDisplaySectionSelector('trades')}>
                     All Trades
                 </button>
-                <button onClick={() => setDisplaySectionSelector('analytics')}>
+                <button className={`tabButton ${displaySectionSelector === "analytics" ? "selected" : ""}`} onClick={() => setDisplaySectionSelector('analytics')}>
                     Analytics
                 </button>
             </div>
