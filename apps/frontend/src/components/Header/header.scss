@@ -1,0 +1,36 @@
+@import '../../styles/variables';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem;
+
+  &__text {
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+  }
+
+  &__button {
+    background-color: $primary;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease;
+
+    &:hover {
+      background-color: darken($primary, 8%);
+    }
+  }
+}

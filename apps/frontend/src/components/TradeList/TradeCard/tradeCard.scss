@@ -1,0 +1,18 @@
+.tradeCard{
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+    margin: auto;
+}
+.entryDataItem {
+    margin: 5px;
+    flex-grow: 1;
+    background-color: inherit;
+    > :nth-child(even){
+        font-weight: 700;
+    }
+    > :nth-child(odd){
+        color: rgba(0,0,0,0.6);
+        margin-bottom: 0.2rem;
+    }
+}
