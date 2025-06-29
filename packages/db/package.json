@@ -1,0 +1,6 @@
+{
+    "name": "@trading-journal/db",
+    "version": "0.0.1",
+    "main": "src/index.ts",
+    "license": "MIT"
+}
