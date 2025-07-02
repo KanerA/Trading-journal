@@ -24,7 +24,7 @@ importers:
         version: link:../../packages/db
       '@trading-journal/shared':
         specifier: workspace:*
-        version: link:../../shared/types
+        version: link:../../shared
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -124,7 +124,7 @@ importers:
         version: 8.6.0(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@mui/material@7.1.2(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@mui/system@7.1.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(date-fns@4.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@trading-journal/shared':
         specifier: workspace:*
-        version: link:../../shared/types
+        version: link:../../shared
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -183,7 +183,7 @@ importers:
 
   packages/db: {}
 
-  shared/types: {}
+  shared: {}
 
 packages:
 
