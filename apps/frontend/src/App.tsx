@@ -12,7 +12,7 @@ function App() {
     <>
       <Header openModal={openModal} />
       <MainPage />
-      {isModalOpen && <AddTradeModal closeModal={closeModal} />}
+      <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} />
     </>
   )
 }

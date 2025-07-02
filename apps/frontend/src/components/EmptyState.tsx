@@ -1,8 +1,11 @@
 const EmptyState = () => (
-    <div>
-        <div>📈</div>
-        <p >No trades yet</p>
-        <p >Start by adding your first trade to begin tracking your performance.</p>
+    <div style={{
+        margin: "3rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    }}>
+        COMING SOON
     </div>
 );
 
