@@ -10,10 +10,22 @@ interface AddTradeModalProps {
 const AddTradeModal = ({ isModalOpen, closeModal }: AddTradeModalProps) => {
 
     return (
-        <Dialog open={isModalOpen} onKeyDown={(evt) => {
-            evt.stopPropagation();
-            if (evt.key === "Escape") closeModal()
-        }}>
+        <Dialog scroll="paper"
+            open={isModalOpen}
+            onKeyDown={(evt) => {
+                evt.stopPropagation();
+                if (evt.key === "Escape") closeModal()
+            }}
+            slotProps={{
+                paper: {
+                    sx: {
+                        width: '60vw',
+                        borderRadius: 2,
+                        maxWidth: "none",
+                    },
+                },
+            }}
+        >
             <AddTradeForm />
         </Dialog >
     );
