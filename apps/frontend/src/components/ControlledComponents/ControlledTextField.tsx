@@ -1,9 +1,9 @@
 import { FormLabel, TextField } from '@mui/material';
 import type { NewTradeFields } from "@trading-journal/shared";
-import { Controller, type Control } from 'react-hook-form';
+import { Controller, type Control, type Path } from 'react-hook-form';
 
 interface ControlledTextFieldProps {
-    name: keyof NewTradeFields,
+    name: Path<NewTradeFields>,
     label: string,
     control: Control<NewTradeFields>,
     error: boolean,
