@@ -16,7 +16,7 @@ const ControlledTextField = ({ name, label, control, error, errorMessage }: Cont
             name={name}
             control={control}
             rules={{ required: `${name} is required.`, min: 1 }}
-            render={({ field }) => (
+            render={({ field: { onChange, ...field } }) => (
                 <>
                     <FormLabel>{label}</FormLabel>
                     <TextField
@@ -25,6 +25,9 @@ const ControlledTextField = ({ name, label, control, error, errorMessage }: Cont
                         fullWidth
                         error={error}
                         helperText={errorMessage}
+                        onChange={(e) => {
+                            onChange(name === "ticker" ? e.target.value.toUpperCase() : e.target.value);
+                        }}
                     />
                 </>
             )}
