@@ -18,7 +18,7 @@ const ControlledTextField = ({ name, label, control, error, errorMessage }: Cont
             rules={{ required: `${name} is required.`, min: 1 }}
             render={({ field: { onChange, ...field } }) => (
                 <>
-                    <FormLabel>{label}</FormLabel>
+                    <FormLabel sx={{ fontWeight: "bold", color: "black" }}>{label}</FormLabel>
                     <TextField
                         {...field}
                         type="text"
