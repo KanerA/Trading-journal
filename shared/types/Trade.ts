@@ -1,5 +1,11 @@
 import type { Outcome } from "./Outcome";
 
+export type PositionExit = {
+    price: number;
+    amount: number;
+    date: string;
+}
+
 export type Trade = {
     ticker: string;
     status: 'Closed' | 'Open';
@@ -7,11 +13,15 @@ export type Trade = {
     entryPrice: number;
     entryDate: string;
     amount: number;
-    exits: {
-        price: number;
-        amount: number;
-        date: string;
-    }[];
+    exits: PositionExit[];
     pnl: number;
     returnPercent: number;
 };
+
+export interface NewTradeFields {
+    ticker: string,
+    entryPrice: number,
+    entryDate: Date,
+    entryAmount: number,
+    exits: PositionExit[]
+}

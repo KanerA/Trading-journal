@@ -1,0 +1,11 @@
+{
+    "name": "@trading-journal/shared",
+    "version": "0.0.1",
+    "main": "index.ts",
+    "license": "MIT",
+    "exports": {
+        ".": "./types/index.ts",
+        "./types": "./types/index.ts",
+        "./enums": "./enums/index.ts"
+    }
+}
