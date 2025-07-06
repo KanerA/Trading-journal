@@ -13,8 +13,8 @@ const TradeList = ({ trades }: TradeListProps) => {
     return (
         <div className="tradeListContainer">
             {hasTrades ? (
-                trades.map((trade, idx) => (
-                    <TradeCard key={idx} trade={trade} />
+                trades.map((trade, index) => (
+                    <TradeCard key={`Tradecard-${index}`} trade={trade} />
                 ))
             ) : (
                 <EmptyState />

@@ -13,7 +13,6 @@ export default function Header({ openModal }: HeaderProps) {
                 top: "0",
                 left: "0",
                 justifyContent: "space-between",
-                bgColor: "#f8f8fa",
                 height: "10vh",
                 boxSizing: "border-box",
                 borderRadius: 0,

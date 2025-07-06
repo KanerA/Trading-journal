@@ -19,7 +19,7 @@ const TradeFormExit = ({ field, errors, control }: TradeExitProps) => {
                         if (!AddTradeExitsLabels[val]) return
                         const isError = !!errors?.[index]?.[val];
                         const errorMessage = errors?.[index]?.[val]?.message || ""
-                        return <Box>
+                        return <Box key={val}>
                             <ControlledTextField control={control} label={AddTradeExitsLabels[val]} name={`exits.${index}.${val}`} error={!!isError} errorMessage={errorMessage} />
                         </Box>
                     })
