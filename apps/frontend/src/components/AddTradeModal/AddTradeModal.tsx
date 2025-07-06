@@ -1,6 +1,6 @@
 
 import { Dialog } from "@mui/material";
-import AddTradeForm from "../AddTradeForm/AddTradeForm";
+import TradeForm from "../TradeForm/TradeForm";
 
 interface AddTradeModalProps {
     closeModal: () => void;
@@ -26,7 +26,7 @@ const AddTradeModal = ({ isModalOpen, closeModal }: AddTradeModalProps) => {
                 },
             }}
         >
-            <AddTradeForm />
+            <TradeForm />
         </Dialog >
     );
 }

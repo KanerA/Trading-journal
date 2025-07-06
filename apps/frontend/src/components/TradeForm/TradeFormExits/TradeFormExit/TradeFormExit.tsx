@@ -1,13 +1,16 @@
 import { Box, Divider } from "@mui/material";
-import type { PositionExit } from "@trading-journal/shared";
+import type { NewTradeFields, PositionExit } from "@trading-journal/shared";
 import { AddTradeExitsLabels } from "@trading-journal/shared/enums";
-import ControlledTextField from "../ControlledComponents/ControlledTextField";
+import type { FieldArrayWithId } from "react-hook-form";
+import ControlledTextField from "../../../ControlledComponents/ControlledTextField";
 
 interface TradeExitProps {
-    field: any, errors: any, control: any
+    field: FieldArrayWithId<NewTradeFields, "exits", "id">,
+    errors: any,
+    control: any
 }
 
-const TradeExit = ({ field, errors, control }: TradeExitProps) => {
+const TradeFormExit = ({ field, errors, control }: TradeExitProps) => {
     return (
         <>
             <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", padding: '0 2rem 1rem 2rem' }} >
@@ -27,4 +30,4 @@ const TradeExit = ({ field, errors, control }: TradeExitProps) => {
     );
 };
 
-export default TradeExit;
+export default TradeFormExit;
