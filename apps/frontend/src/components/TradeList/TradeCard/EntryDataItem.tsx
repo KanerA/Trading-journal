@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 
 interface StatCardItemProps {
     label: string,
@@ -6,10 +7,19 @@ interface StatCardItemProps {
 
 const EntryDataItem = ({ label, value }: StatCardItemProps) => {
     return (
-        <div className="entryDataItem">
-            <div>{label}</div>
-            <div>{value}</div>
-        </div>
+        <Box sx={{
+            margin: "5px",
+            flexGrow: 1,
+            backgroundColor: "inherit",
+        }}>
+            <Typography sx={{
+                color: "rgba(0,0,0,0.6)",
+                marginBottom: "0.2rem",
+            }}>
+                {label}
+            </Typography>
+            <Typography fontWeight={700}>{value}</Typography>
+        </Box>
     );
 };
 
