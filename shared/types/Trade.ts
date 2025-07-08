@@ -12,7 +12,7 @@ export type Trade = {
     outcome: Outcome;
     entryPrice: number;
     entryDate: string;
-    amount: number;
+    entryAmount: number;
     exits: PositionExit[];
     pnl: number;
     returnPercent: number;

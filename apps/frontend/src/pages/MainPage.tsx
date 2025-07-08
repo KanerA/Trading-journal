@@ -26,7 +26,7 @@ const MainPage = () => {
             outcome: 'winner',
             entryPrice: 1500,
             entryDate: '2/15/2000',
-            amount: 50,
+            entryAmount: 50,
             exits: [
                 {
                     price: 1800,
@@ -43,7 +43,7 @@ const MainPage = () => {
             outcome: 'loser',
             entryPrice: 25.1,
             entryDate: '2/15/2000',
-            amount: 40,
+            entryAmount: 40,
             exits: [
                 {
                     price: 27.8,
