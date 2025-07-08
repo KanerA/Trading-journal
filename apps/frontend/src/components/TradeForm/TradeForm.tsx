@@ -1,18 +1,17 @@
-import {
-    Paper
-} from "@mui/material";
+import { Paper } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { type NewTradeFields } from "@trading-journal/shared";
+import type { NewTradeFields, Trade } from "@trading-journal/shared";
 import React from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
 
 interface AddTradeFormProps {
+    closeModal: () => void
 }
 
-const TradeForm: React.FC<AddTradeFormProps> = ({ }) => {
+const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
     const {
         control,
         handleSubmit,
