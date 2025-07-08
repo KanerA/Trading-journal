@@ -3,8 +3,8 @@ import { Paper } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import type { NewTradeFields, PositionStatus, Trade } from "@trading-journal/shared";
-import React from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { yupSchema } from "../../formValidation/yupSchema";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
@@ -32,6 +32,11 @@ const calcPositionStatus = (entryAmount: number, exits: Trade["exits"]): Positio
 }
 
 const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
+    const [exits, setExits] = useState<NewTradeFields["exits"]>([{
+        price: 50,
+        date: new Date(),
+        amount: 0,
+    }]);
     const {
         control,
         handleSubmit,
@@ -65,7 +70,8 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
         }
 
         console.log({ generatedData })
-        setTimeout(closeModal, 500);
+        localStorage.setItem("trades", JSON.stringify([generatedData, ...JSON.parse(localStorage.getItem("trades") || "[]")]));
+        closeModal();
     };
 
     return (
@@ -73,7 +79,7 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <TradeFormEntryContainer control={control} errors={errors} />
-                    <TradeFormExitsContainer control={control} errors={errors["exits"]} useFieldArray={useFieldArray} />
+                    <TradeFormExitsContainer control={control} errors={errors["exits"]} exits={exits} />
                 </form>
             </LocalizationProvider>
         </Paper>

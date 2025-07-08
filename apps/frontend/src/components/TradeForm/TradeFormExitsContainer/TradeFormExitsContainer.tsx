@@ -6,11 +6,11 @@ import TradeFormExits from '../TradeFormExits/TradeFormExits';
 interface TradeFormExitsContainerProps {
     control: Control<NewTradeFields>
     errors: FieldErrors<NewTradeFields>["exits"]
-    useFieldArray: any
+    exits: NewTradeFields["exits"]
 
 }
 
-const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerProps) => {
+const TradeFormExitsContainer = ({ control, errors, exits }: TradeFormExitsContainerProps) => {
     return (
         <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: "0.8rem" }}>
@@ -21,7 +21,7 @@ const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerPro
                     + Add New Exit
                 </Button>
             </Box>
-            <TradeFormExits control={control} errors={errors} />
+            <TradeFormExits control={control} errors={errors} exits={exits} />
             <Box>
                 <Button type="submit" variant="contained" color="primary">
                     Submit Trade

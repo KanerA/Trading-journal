@@ -1,23 +1,23 @@
 import { Box, Divider } from "@mui/material";
 import type { NewTradeFields, PositionExit } from "@trading-journal/shared";
 import { AddTradeExitsLabels } from "@trading-journal/shared/enums";
-import type { FieldArrayWithId, FieldErrors } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
 import ControlledDatePicker from "../../../ControlledComponents/ControlledDatePicker";
 import ControlledTextField from "../../../ControlledComponents/ControlledTextField";
 
 interface TradeExitProps {
-    field: FieldArrayWithId<NewTradeFields, "exits", "id">,
+    exit: PositionExit,
     errors: FieldErrors<NewTradeFields>["exits"],
     control: any,
     exitItemIndex: number
 }
 
-const TradeFormExit = ({ field, errors, control, exitItemIndex }: TradeExitProps) => {
+const TradeFormExit = ({ exit, errors, control, exitItemIndex }: TradeExitProps) => {
     return (
         <>
             <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", padding: '0 2rem 1rem 2rem' }} >
                 {
-                    (Object.keys(field) as (keyof PositionExit)[]).map((val) => {
+                    (Object.keys(exit) as (keyof PositionExit)[]).map((val) => {
                         if (!AddTradeExitsLabels[val]) return
                         const isError = !!errors?.[exitItemIndex]?.[val];
                         const errorMessage = errors?.[exitItemIndex]?.[val]?.message || "";
@@ -26,7 +26,7 @@ const TradeFormExit = ({ field, errors, control, exitItemIndex }: TradeExitProps
 
                         }
                         return <Box key={val}>
-                            <ControlledTextField control={control} label={AddTradeExitsLabels[val]} name={`exits.${exitItemIndex}.${val}`} error={!!isError} errorMessage={errorMessage} />
+                            <ControlledTextField control={control} label={AddTradeExitsLabels[val]} name={`exits.${exitItemIndex}.${val}`} error={!!isError} errorMessage={errorMessage} value={exit[val]} />
                         </Box>
                     })
                 }

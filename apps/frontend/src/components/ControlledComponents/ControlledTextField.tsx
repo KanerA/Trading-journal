@@ -7,10 +7,11 @@ interface ControlledTextFieldProps {
     label: string,
     control: Control<NewTradeFields>,
     error: boolean,
-    errorMessage: string
+    errorMessage: string,
+    value: number | string
 }
 
-const ControlledTextField = ({ name, label, control, error, errorMessage }: ControlledTextFieldProps) => {
+const ControlledTextField = ({ name, label, control, error, errorMessage, value }: ControlledTextFieldProps) => {
     return (
         <Controller
             name={name}
@@ -20,6 +21,7 @@ const ControlledTextField = ({ name, label, control, error, errorMessage }: Cont
                     <FormLabel sx={{ fontWeight: "bold", color: "black" }}>{label}</FormLabel>
                     <TextField
                         {...field}
+                        value={value}
                         type="text"
                         fullWidth
                         error={error}
