@@ -1,5 +1,5 @@
+import { Box, Typography } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
-import "./TradeTotalsDisplay.scss";
 
 interface TradeTotalDisplayProps {
     pnl: Trade["pnl"],
@@ -8,16 +8,16 @@ interface TradeTotalDisplayProps {
 
 const TradeTotalDisplay = ({ pnl, returnPercent }: TradeTotalDisplayProps) => {
     return (
-        <div className="tradeTotalDisplay">
-            <div>
-                <p>Total P&L</p>
-                <p className={`${+pnl.toFixed(2) > 0 ? "winner" : "loser"}`}>${pnl.toFixed(2)}</p>
-            </div>
-            <div>
-                <p>Return %</p>
-                <p className={`${+returnPercent.toFixed(2) > 0 ? "winner" : "loser"}`}>{returnPercent.toFixed(2)}%</p>
-            </div>
-        </div>
+        <Box sx={{ width: "100%", display: "flex" }}>
+            <Box sx={{ flexGrow: 1 }}>
+                <Typography sx={{ marginBottom: 1 }}>Total P&L</Typography>
+                <Typography sx={{ color: `${+pnl > 0 ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)"}` }}>${pnl.toFixed(2)}</Typography>
+            </Box>
+            <Box sx={{ flexGrow: 1 }}>
+                <Typography sx={{ marginBottom: 1 }}>Return %</Typography>
+                <Typography sx={{ color: `${+returnPercent > 0 ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)"}` }}>{returnPercent.toFixed(2)}%</Typography>
+            </Box>
+        </Box>
     );
 };
 

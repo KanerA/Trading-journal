@@ -1,29 +1,39 @@
+import { Box } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
 import { useState } from "react";
 import EmptyState from "../EmptyState";
 import TradeList from "../TradeList/TradeList";
-import "./tabs.scss";
+import TabsButton from "./TabsButton";
 
 interface TabsProps {
     trades: Trade[]
 }
 
-export default function Tabs({ trades }: TabsProps) {
-    const [displaySectionSelector, setDisplaySectionSelector] = useState<"trades" | "analytics">("trades");
+enum TabsOptions {
+    trades = "Trades",
+    analytics = "Analytics"
+}
+
+const Tabs = ({ trades }: TabsProps) => {
+    const [displaySectionSelector, setDisplaySectionSelector] = useState<TabsOptions>(TabsOptions.trades);
 
     return (
-        <div className="tabContainer">
-            <div className="tabButtonContainer">
-                <button className={`tabButton ${displaySectionSelector === "trades" ? "selected" : ""}`} onClick={() => setDisplaySectionSelector('trades')}>
-                    All Trades
-                </button>
-                <button className={`tabButton ${displaySectionSelector === "analytics" ? "selected" : ""}`} onClick={() => setDisplaySectionSelector('analytics')}>
-                    Analytics
-                </button>
-            </div>
-            {
-                displaySectionSelector === "trades" ? <TradeList trades={trades} /> : <EmptyState />
-            }
-        </div>
+        <Box sx={{
+            marginTop: '0.5rem',
+            width: '100%',
+        }}>
+            <Box sx={{
+                width: '98vw',
+                display: 'flex',
+                margin: 'auto',
+            }}>
+                <TabsButton label={"Trades"} onClick={() => setDisplaySectionSelector(TabsOptions.trades)} variant={`${displaySectionSelector === TabsOptions.trades ? "contained" : "outlined"}`} />
+                <TabsButton label={"Analytics"} onClick={() => setDisplaySectionSelector(TabsOptions.analytics)} variant={`${displaySectionSelector === TabsOptions.analytics ? "contained" : "outlined"}`} />
+            </Box>
+            {displaySectionSelector === TabsOptions.trades && <TradeList trades={trades} />}
+            {displaySectionSelector === TabsOptions.analytics && <EmptyState />}
+        </Box>
     );
 }
+
+export default Tabs;

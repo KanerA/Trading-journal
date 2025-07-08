@@ -20,7 +20,7 @@ const TradeFormEntryContainer = ({ control, errors }: TradeFormEntryDataProps) =
                 {
                     (Object.keys(AddTradeEntryLabels) as (keyof NewTradeFields)[]).map((val) => {
                         if (val === "entryDate") {
-                            return <Grid size={{ xs: 12, sm: 6 }}>
+                            return <Grid size={{ xs: 12, sm: 6 }} key={val}>
                                 <Controller
                                     name={val}
                                     control={control}
@@ -47,7 +47,7 @@ const TradeFormEntryContainer = ({ control, errors }: TradeFormEntryDataProps) =
                                 />
                             </Grid>
                         }
-                        return <Grid size={{ xs: 12, sm: 6 }}>
+                        return <Grid size={{ xs: 12, sm: 6 }} key={val}>
                             <ControlledTextField control={control} name={val} label={val !== "exits" ? AddTradeEntryLabels[val] : ""} error={!!errors[val]}
                                 errorMessage={errors[val]?.message || ""} />
                         </Grid>

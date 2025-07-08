@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import type { Trade } from '@trading-journal/shared';
 import { useEffect, useState } from 'react';
 import StatsGrid from '../components/StatsGrid/StatsGrid.tsx';
@@ -10,7 +11,7 @@ export interface MainStats {
     losers: number,
 }
 
-function MainPage() {
+const MainPage = () => {
     const [mainStats, setMainStats] = useState<MainStats>({
         totalPnL: 0,
         winRate: "0%",
@@ -76,12 +77,10 @@ function MainPage() {
     }, [])
 
     return (
-        <div>
-            <div>
-                <StatsGrid mainStats={mainStats} />
-                <Tabs trades={mockTrades} />
-            </div>
-        </div>
+        <Box>
+            <StatsGrid mainStats={mainStats} />
+            <Tabs trades={mockTrades} />
+        </Box>
     );
 }
 
