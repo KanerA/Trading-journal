@@ -19,47 +19,7 @@ const MainPage = () => {
         losers: 0,
     })
 
-    const mockTrades: Trade[] = [
-        {
-            ticker: 'TSLA',
-            status: 'Closed',
-            outcome: 'winner',
-            entryPrice: 1500,
-            entryDate: '2/15/2000',
-            entryAmount: 50,
-            exits: [
-                {
-                    price: 1800,
-                    amount: 50,
-                    date: '6/24/2025',
-                },
-            ],
-            pnl: 15000,
-            returnPercent: 20,
-        },
-        {
-            ticker: 'ASTS',
-            status: 'Closed',
-            outcome: 'loser',
-            entryPrice: 25.1,
-            entryDate: '2/15/2000',
-            entryAmount: 40,
-            exits: [
-                {
-                    price: 27.8,
-                    amount: 10,
-                    date: '6/24/2025',
-                },
-                {
-                    price: 23.1,
-                    amount: 30,
-                    date: '6/24/2025',
-                },
-            ],
-            pnl: (27.8 * 10 + 23.1 * 30) - (40 * 25.1),
-            returnPercent: ((27.8 * 10 + 23.1 * 30) - (40 * 25.1)) / (40 * 25.1) * 100,
-        },
-    ];
+    const mockTrades: Trade[] = localStorage.getItem("trades") ? JSON.parse(localStorage.getItem("trades")!) : [];
 
     const calcStats = (trades: Trade[]) => {
         return trades.reduce((prev, acc) => {

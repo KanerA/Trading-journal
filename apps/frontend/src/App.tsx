@@ -10,7 +10,7 @@ function App() {
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
   return (
-    <Box sx={{ backgroundColor: "#eff4ff" }}>
+    <Box sx={{ backgroundColor: "#eff4ff", minHeight: "100vh", padding: "1rem" }}>
       <Header openModal={openModal} />
       <MainPage />
       <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} />
