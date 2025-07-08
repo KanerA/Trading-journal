@@ -18,9 +18,8 @@ const ControlledDatePicker = ({ name, control }: ControlledDatePickerProps) => {
             <Controller
                 name={name}
                 control={control}
-                render={({ field, fieldState }) => {
-                    console.log(field)
-                    return <>
+                render={({ field, fieldState }) => (
+                    <>
                         <FormLabel sx={{ fontWeight: "bold", color: "black" }}>{AddTradeEntryLabels.entryDate}</FormLabel>
                         <DatePicker
                             defaultValue={new Date()}
@@ -36,7 +35,7 @@ const ControlledDatePicker = ({ name, control }: ControlledDatePickerProps) => {
                             }}
                         />
                     </>
-                }}
+                )}
             />
         </Box>
     );
