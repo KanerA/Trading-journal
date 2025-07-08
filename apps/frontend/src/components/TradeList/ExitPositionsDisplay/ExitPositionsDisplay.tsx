@@ -29,7 +29,7 @@ const ExitPositionsDisplay = ({ exits }: ExitPositionsDisplayProps) => {
                     {/** TODO: Combine all to const or something to map instead of hard coded */}
                     <Typography sx={sharedTypographySx}>Exit #{index + 1}: </Typography><Typography fontWeight="bold">${exit.price.toFixed(2)}</Typography>
                     <Typography sx={sharedTypographySx}>Amount: </Typography><Typography fontWeight="bold">{exit.amount} shares</Typography>
-                    <Typography sx={sharedTypographySx}>Date: </Typography><Typography fontWeight="bold">{exit.date}</Typography>
+                    <Typography sx={sharedTypographySx}>Date: </Typography><Typography fontWeight="bold">{exit.date.toString()}</Typography>
                 </Box>
             ))}
 
