@@ -1,12 +1,15 @@
+import { Box } from "@mui/material";
+
 const EmptyState = () => (
-    <div style={{
+    <Box sx={{
         margin: "3rem",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        height: "100vh",
     }}>
         COMING SOON
-    </div>
+    </Box>
 );
 
 export default EmptyState

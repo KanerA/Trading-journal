@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { useState } from 'react'
 import './App.css'
 import AddTradeModal from './components/AddTradeModal/AddTradeModal'
@@ -9,11 +10,11 @@ function App() {
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
   return (
-    <>
+    <Box sx={{ backgroundColor: "#eff4ff" }}>
       <Header openModal={openModal} />
       <MainPage />
       <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} />
-    </>
+    </Box>
   )
 }
 
