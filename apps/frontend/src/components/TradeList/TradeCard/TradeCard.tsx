@@ -22,7 +22,7 @@ const TradeCard = ({ trade }: Props) => (
     }}>
         <TradeCardHeader ticker={trade.ticker} status={trade.status} outcome={trade.outcome} />
 
-        <TradeCardEntryData entryPrice={trade.entryPrice} entryDate={trade.entryDate} amount={trade.amount} />
+        <TradeCardEntryData entryPrice={trade.entryPrice} entryDate={trade.entryDate} entryAmount={trade.entryAmount} />
 
         <ExitPositionsDisplay exits={trade.exits} />
 

@@ -26,7 +26,7 @@ const AddTradeModal = ({ isModalOpen, closeModal }: AddTradeModalProps) => {
                 },
             }}
         >
-            <TradeForm />
+            <TradeForm closeModal={closeModal} />
         </Dialog >
     );
 }

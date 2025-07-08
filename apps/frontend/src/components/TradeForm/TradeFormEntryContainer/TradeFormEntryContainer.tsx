@@ -1,8 +1,8 @@
-import { Box, DialogTitle, FormLabel, Grid } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers";
+import { Box, DialogTitle, Grid } from "@mui/material";
 import type { NewTradeFields } from "@trading-journal/shared";
 import { AddTradeEntryLabels } from "@trading-journal/shared/enums";
-import { Controller, type Control, type FieldErrors } from "react-hook-form";
+import { type Control, type FieldErrors } from "react-hook-form";
+import ControlledDatePicker from "../../ControlledComponents/ControlledDatePicker";
 import ControlledTextField from "../../ControlledComponents/ControlledTextField";
 
 interface TradeFormEntryDataProps {
@@ -21,30 +21,9 @@ const TradeFormEntryContainer = ({ control, errors }: TradeFormEntryDataProps) =
                     (Object.keys(AddTradeEntryLabels) as (keyof NewTradeFields)[]).map((val) => {
                         if (val === "entryDate") {
                             return <Grid size={{ xs: 12, sm: 6 }} key={val}>
-                                <Controller
-                                    name={val}
-                                    control={control}
-                                    rules={{ required: "Entry date is required" }}
-                                    render={({ field, fieldState }) => (
-                                        <>
-                                            <FormLabel sx={{ fontWeight: "bold", color: "black" }}>{AddTradeEntryLabels.entryDate}</FormLabel>
-                                            <DatePicker
-                                                value={field.value}
-                                                defaultValue={new Date()}
-                                                disableFuture={true}
-                                                onChange={(date) => field.onChange(date)}
-                                                format="dd/MM/yyyy"
-                                                slotProps={{
-                                                    textField: {
-                                                        fullWidth: true,
-                                                        error: !!fieldState.error,
-                                                        helperText: fieldState.error?.message,
-                                                    },
-                                                }}
-                                            />
-                                        </>
-                                    )}
-                                />
+                                <ControlledDatePicker control={control} name={val} label={AddTradeEntryLabels[val]} error={!!errors[val]}
+                                    errorMessage={errors[val]?.message || ""} />
+
                             </Grid>
                         }
                         return <Grid size={{ xs: 12, sm: 6 }} key={val}>

@@ -10,15 +10,16 @@ interface AddTradeExitProps {
 }
 
 const TradeFormExits = ({ control, errors }: AddTradeExitProps) => {
-    const { fields } = useFieldArray({ control, name: "exits" })
+    const { fields } = useFieldArray({ control, name: "exits" });
     return (
         <Paper elevation={2} sx={{ marginTop: "0.8rem" }}>
             {fields.map((field, index) => (
                 <Box key={field.id}>
                     <TradeFormExitHeader number={index + 1} />
-                    <TradeFormExit control={control} errors={errors} field={field} />
+                    <TradeFormExit control={control} errors={errors} field={field} exitItemIndex={index} />
                 </Box>
-            ))}
+            )
+            )}
 
         </Paper>
     );

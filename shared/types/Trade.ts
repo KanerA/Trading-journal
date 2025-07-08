@@ -3,16 +3,18 @@ import type { Outcome } from "./Outcome";
 export type PositionExit = {
     price: number;
     amount: number;
-    date: string;
+    date: Date;
 }
+
+export type PositionStatus = "Open" | "Closed";
 
 export type Trade = {
     ticker: string;
-    status: 'Closed' | 'Open';
+    status: PositionStatus;
     outcome: Outcome;
     entryPrice: number;
-    entryDate: string;
-    amount: number;
+    entryDate: Date;
+    entryAmount: number;
     exits: PositionExit[];
     pnl: number;
     returnPercent: number;
