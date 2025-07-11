@@ -3,7 +3,7 @@ import type { Outcome } from "./Outcome";
 export type PositionExit = {
     price: number;
     amount: number;
-    date: Date;
+    date: string;
 }
 
 export type PositionStatus = "Open" | "Closed";
@@ -13,7 +13,7 @@ export type Trade = {
     status: PositionStatus;
     outcome: Outcome;
     entryPrice: number;
-    entryDate: Date;
+    entryDate: string;
     entryAmount: number;
     exits: PositionExit[];
     pnl: number;
@@ -23,7 +23,7 @@ export type Trade = {
 export interface NewTradeFields {
     ticker: string,
     entryPrice: number,
-    entryDate: Date,
+    entryDate: string,
     entryAmount: number,
     exits: PositionExit[]
 }
