@@ -6,18 +6,18 @@ import ControlledDatePicker from "../../../ControlledComponents/ControlledDatePi
 import ControlledTextField from "../../../ControlledComponents/ControlledTextField";
 
 interface TradeExitProps {
-    exit: PositionExit,
+    exit: PositionExit, // Keep for editing existing exits
     errors: FieldErrors<NewTradeFields>["exits"],
     control: any,
     exitItemIndex: number
 }
 
-const TradeFormExit = ({ exit, errors, control, exitItemIndex }: TradeExitProps) => {
+const TradeFormExit = ({ errors, control, exitItemIndex }: TradeExitProps) => {
     return (
         <>
             <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", padding: '0 2rem 1rem 2rem' }} >
                 {
-                    (Object.keys(exit) as (keyof PositionExit)[]).map((val) => {
+                    (Object.keys(AddTradeExitsLabels) as (keyof PositionExit)[]).map((val, index) => {
                         if (!AddTradeExitsLabels[val]) return
                         const isError = !!errors?.[exitItemIndex]?.[val];
                         const errorMessage = errors?.[exitItemIndex]?.[val]?.message || "";
@@ -26,7 +26,7 @@ const TradeFormExit = ({ exit, errors, control, exitItemIndex }: TradeExitProps)
 
                         }
                         return <Box key={val}>
-                            <ControlledTextField control={control} label={AddTradeExitsLabels[val]} name={`exits.${exitItemIndex}.${val}`} error={!!isError} errorMessage={errorMessage} value={exit[val]} />
+                            <ControlledTextField control={control} label={AddTradeExitsLabels[val]} name={`exits.${exitItemIndex}.${val}`} error={!!isError} errorMessage={errorMessage} />
                         </Box>
                     })
                 }
