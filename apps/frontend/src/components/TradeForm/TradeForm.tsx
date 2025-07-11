@@ -3,9 +3,12 @@ import { Paper } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import type { NewTradeFields, PositionStatus, Trade } from "@trading-journal/shared";
-import React, { useState } from "react";
+import { format } from "date-fns";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { yupSchema } from "../../formValidation/yupSchema";
+import { addTrade } from "../../store/reducers/tradesSlice";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
 
@@ -32,11 +35,8 @@ const calcPositionStatus = (entryAmount: number, exits: Trade["exits"]): Positio
 }
 
 const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
-    const [exits, setExits] = useState<NewTradeFields["exits"]>([{
-        price: 50,
-        date: new Date(),
-        amount: 0,
-    }]);
+    const dispatch = useDispatch();
+
     const {
         control,
         handleSubmit,
@@ -45,11 +45,11 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
         defaultValues: {
             ticker: "",
             entryPrice: 0,
-            entryDate: new Date(),
+            entryDate: format(new Date(), "dd/MM/yyyy"),
             entryAmount: 0,
             exits: [{
                 price: 0,
-                date: new Date(),
+                date: format(new Date(), "dd/MM/yyyy"),
                 amount: 0,
             },
             ],
@@ -66,10 +66,8 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
             pnl,
             returnPercent,
             status: calcPositionStatus(data.entryAmount, data.exits),
-
         }
-
-        console.log({ generatedData })
+        dispatch(addTrade(generatedData))
         localStorage.setItem("trades", JSON.stringify([generatedData, ...JSON.parse(localStorage.getItem("trades") || "[]")]));
         closeModal();
     };
@@ -79,7 +77,7 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <TradeFormEntryContainer control={control} errors={errors} />
-                    <TradeFormExitsContainer control={control} errors={errors["exits"]} exits={exits} />
+                    <TradeFormExitsContainer control={control} errors={errors["exits"]} />
                 </form>
             </LocalizationProvider>
         </Paper>

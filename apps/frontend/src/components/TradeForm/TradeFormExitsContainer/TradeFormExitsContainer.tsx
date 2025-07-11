@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
 import type { NewTradeFields } from '@trading-journal/shared';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import { type Control, type FieldErrors } from 'react-hook-form';
 import TradeFormExits from '../TradeFormExits/TradeFormExits';
@@ -7,19 +8,22 @@ import TradeFormExits from '../TradeFormExits/TradeFormExits';
 interface TradeFormExitsContainerProps {
     control: Control<NewTradeFields>
     errors: FieldErrors<NewTradeFields>["exits"]
-    exits: NewTradeFields["exits"]
-
 }
 
-const TradeFormExitsContainer = ({ control, errors, exits }: TradeFormExitsContainerProps) => {
-    const [exitsState, setExitsState] = useState<NewTradeFields["exits"]>(exits || []);
+const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerProps) => {
+    const [defaultStateExits] = useState<NewTradeFields["exits"]>([{
+        price: 50,
+        date: format(new Date(), "dd/MM/yyyy"),
+        amount: 0,
+    }]);
+    const [exitsState, setExitsState] = useState<NewTradeFields["exits"]>(defaultStateExits || []);
 
     // This function can be used to add a new exit position 
     const addNewExit = () => {
         const newExit = {
             price: 0,
             amount: 0,
-            date: new Date(),
+            date: format(new Date(), "dd/MM/yyyy"),
         };
         setExitsState([...exitsState, newExit]);
     }
@@ -35,7 +39,7 @@ const TradeFormExitsContainer = ({ control, errors, exits }: TradeFormExitsConta
             </Box>
             <TradeFormExits control={control} errors={errors} exits={exitsState} />
             <Box>
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained">
                     Submit Trade
                 </Button>
             </Box>

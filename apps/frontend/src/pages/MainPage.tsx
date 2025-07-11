@@ -1,8 +1,10 @@
 import { Box } from '@mui/material';
 import type { Trade } from '@trading-journal/shared';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import StatsGrid from '../components/StatsGrid/StatsGrid.tsx';
 import Tabs from '../components/Tabs/Tabs.tsx';
+import { getAllTrades } from '../store/selectors/tradeSelector.ts';
 
 export interface MainStats {
     totalPnL: number,
@@ -17,9 +19,9 @@ const MainPage = () => {
         winRate: "0%",
         winners: 0,
         losers: 0,
-    })
+    });
 
-    const mockTrades: Trade[] = localStorage.getItem("trades") ? JSON.parse(localStorage.getItem("trades")!) : [];
+    const trades = useSelector(getAllTrades)
 
     const calcStats = (trades: Trade[]) => {
         return trades.reduce((prev, acc) => {
@@ -32,14 +34,14 @@ const MainPage = () => {
     }
 
     useEffect(() => {
-        const calculatedStats = calcStats(mockTrades);
+        const calculatedStats = calcStats(trades);
         setMainStats(calculatedStats)
     }, [])
 
     return (
         <Box>
             <StatsGrid mainStats={mainStats} />
-            <Tabs trades={mockTrades} />
+            <Tabs trades={trades} />
         </Box>
     );
 }

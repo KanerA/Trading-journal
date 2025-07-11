@@ -18,7 +18,7 @@ const ExitPositionsDisplay = ({ exits }: ExitPositionsDisplayProps) => {
         <Box>
             <Typography variant="h5">Exit Positions</Typography>
             {exits.length > 0 && exits.map((exit, index) => (
-                <Box sx={{
+                <Box key={`exit-${index}`} sx={{
                     display: "flex",
                     alignItems: "center",
                     height: "2rem",
