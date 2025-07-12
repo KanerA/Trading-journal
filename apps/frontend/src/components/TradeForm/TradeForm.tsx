@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import { getSchema } from "../../formValidation/yupSchema";
 import { addTrade } from "../../store/reducers/tradesSlice";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
@@ -61,17 +62,18 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
     });
 
     const onSubmit = (data: NewTradeFields) => {
+        // TODO: add id to exits
         console.log("Submitted:", data);
         const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.entryAmount, data.exits)
         const generatedData: Trade = {
             ...data,
-            outcome: pnl >= 0 ? "winner" : "loser",
+            id: uuidv4(),
+            outcome: pnl >= 0 ? Outcome.Winner : Outcome.Loser,
             pnl,
             returnPercent,
             status: calcPositionStatus(data.entryAmount, data.exits),
         }
         dispatch(addTrade(generatedData))
-        localStorage.setItem("trades", JSON.stringify([generatedData, ...JSON.parse(localStorage.getItem("trades") || "[]")]));
         closeModal();
     };
 

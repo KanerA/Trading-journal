@@ -16,6 +16,7 @@ export enum Outcome {
 }
 
 export type Trade = {
+    id: string;
     ticker: string;
     status: PositionStatus;
     outcome: Outcome;
