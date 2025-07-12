@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { yupSchema } from "../../formValidation/yupSchema";
+import { getSchema } from "../../formValidation/yupSchema";
 import { addTrade } from "../../store/reducers/tradesSlice";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
@@ -34,27 +34,30 @@ const calcPositionStatus = (entryAmount: number, exits: Trade["exits"]): Positio
     return totalAmountSold < entryAmount ? "Open" : "Closed";
 }
 
+const defaultValuesForm: NewTradeFields = {
+    ticker: "",
+    entryPrice: 0,
+    entryDate: format(new Date(), "dd/MM/yyyy"),
+    entryAmount: 0,
+    exits: [{
+        price: 0,
+        date: format(new Date(), "dd/MM/yyyy"),
+        amount: 0,
+    }],
+}
+
 const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
     const dispatch = useDispatch();
-
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm<NewTradeFields>({
-        defaultValues: {
-            ticker: "",
-            entryPrice: 0,
-            entryDate: format(new Date(), "dd/MM/yyyy"),
-            entryAmount: 0,
-            exits: [{
-                price: 0,
-                date: format(new Date(), "dd/MM/yyyy"),
-                amount: 0,
-            },
-            ],
-        },
-        resolver: yupResolver(yupSchema)
+        defaultValues: defaultValuesForm,
+        resolver: (data, context, options) => {
+            const schema = getSchema(data.entryDate);
+            return yupResolver(schema)(data, context, options);
+        }
     });
 
     const onSubmit = (data: NewTradeFields) => {
