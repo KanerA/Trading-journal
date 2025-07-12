@@ -20,7 +20,7 @@ const TradeCard = ({ trade }: Props) => (
         borderRadius: '15px',
         border: '1px solid rgba(0,0,0,0.1)',
     }}>
-        <TradeCardHeader ticker={trade.ticker} status={trade.status} outcome={trade.outcome} />
+        <TradeCardHeader tradeId={trade.id} ticker={trade.ticker} status={trade.status} outcome={trade.outcome} />
 
         <TradeCardEntryData entryPrice={trade.entryPrice} entryDate={trade.entryDate} entryAmount={trade.entryAmount} />
 

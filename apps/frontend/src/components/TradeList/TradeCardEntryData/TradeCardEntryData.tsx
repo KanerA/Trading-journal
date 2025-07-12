@@ -18,7 +18,7 @@ const TradeCardEntryData = ({ entryAmount, entryDate, entryPrice }: TradeCardEnt
                 <EntryDataItem label="Entry Price" value={`$${entryPrice.toFixed(2)}`} />
                 <EntryDataItem label="Entry Date" value={format(entryDate, "dd/MM/yyyy")} />
                 <EntryDataItem label="Amount" value={`${entryAmount} Shares`} />
-            </Box >
+            </Box>
             <Divider sx={{ my: 2 }} />
         </>
     );
