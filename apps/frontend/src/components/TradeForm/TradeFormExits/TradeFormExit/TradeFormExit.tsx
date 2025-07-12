@@ -1,6 +1,5 @@
 import { Box, Divider } from "@mui/material";
-import type { NewTradeFields, PositionExit } from "@trading-journal/shared";
-import { AddTradeExitsLabels } from "@trading-journal/shared/enums";
+import { type NewTradeFields, type PositionExit, AddTradeExitsLabels } from "@trading-journal/shared";
 import type { FieldErrors } from "react-hook-form";
 import ControlledDatePicker from "../../../ControlledComponents/ControlledDatePicker";
 import ControlledTextField from "../../../ControlledComponents/ControlledTextField";

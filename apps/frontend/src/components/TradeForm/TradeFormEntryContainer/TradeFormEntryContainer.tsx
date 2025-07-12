@@ -1,6 +1,5 @@
 import { Box, DialogTitle, Grid } from "@mui/material";
-import type { NewTradeFields } from "@trading-journal/shared";
-import { AddTradeEntryLabels } from "@trading-journal/shared/enums";
+import { type NewTradeFields, AddTradeEntryLabels } from "@trading-journal/shared";
 import { type Control, type FieldErrors } from "react-hook-form";
 import ControlledDatePicker from "../../ControlledComponents/ControlledDatePicker";
 import ControlledTextField from "../../ControlledComponents/ControlledTextField";
