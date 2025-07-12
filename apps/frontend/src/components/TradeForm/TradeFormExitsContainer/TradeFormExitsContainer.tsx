@@ -10,34 +10,30 @@ interface TradeFormExitsContainerProps {
     errors: FieldErrors<NewTradeFields>["exits"]
 }
 
-const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerProps) => {
-    const [defaultStateExits] = useState<NewTradeFields["exits"]>([{
-        price: 50,
-        date: format(new Date(), "dd/MM/yyyy"),
-        amount: 0,
-    }]);
-    const [exitsState, setExitsState] = useState<NewTradeFields["exits"]>(defaultStateExits || []);
+const defaultExit = {
+    price: 0,
+    date: format(new Date(), "dd/MM/yyyy"),
+    amount: 0,
+};
 
-    // This function can be used to add a new exit position 
-    const addNewExit = () => {
-        const newExit = {
-            price: 0,
-            amount: 0,
-            date: format(new Date(), "dd/MM/yyyy"),
-        };
-        setExitsState([...exitsState, newExit]);
-    }
+const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerProps) => {
+    const [exitsInputs, setExitsInputs] = useState<NewTradeFields["exits"]>([defaultExit]);
+
+    const addNewExitInput = () => setExitsInputs([...exitsInputs, defaultExit]);
+
     return (
         <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: "0.8rem" }}>
                 <Typography variant="h5">
                     Add Exit Positions
                 </Typography>
-                <Button variant="contained" onClick={() => addNewExit()}>
+                <Button variant="contained" onClick={() => addNewExitInput()}>
                     + Add New Exit
                 </Button>
             </Box>
-            <TradeFormExits control={control} errors={errors} exits={exitsState} />
+
+            <TradeFormExits control={control} errors={errors} exits={exitsInputs} />
+
             <Box>
                 <Button type="submit" variant="contained">
                     Submit Trade
