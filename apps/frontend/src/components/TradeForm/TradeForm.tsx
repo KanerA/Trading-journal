@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { getSchema } from "../../formValidation/yupSchema";
+import { HttpMethod, useApiMutation } from "../../hooks/useApi";
 import { addTrade } from "../../store/reducers/tradesSlice";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
@@ -49,6 +50,8 @@ const defaultValuesForm: NewTradeFields = {
 
 const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
     const dispatch = useDispatch();
+    const { mutate } = useApiMutation("/trade", HttpMethod.POST, ["trades"]);
+
     const {
         control,
         handleSubmit,
@@ -73,7 +76,8 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
             returnPercent,
             status: calcPositionStatus(data.entryAmount, data.exits),
         }
-        dispatch(addTrade(generatedData))
+        dispatch(addTrade(generatedData));
+        mutate(generatedData);
         closeModal();
     };
 
