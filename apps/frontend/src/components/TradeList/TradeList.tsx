@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import type { Trade } from '@trading-journal/shared';
-import EmptyState from '../EmptyState';
+import NoTrades from '../NoTrades';
 import TradeCard from './TradeCard/TradeCard';
 
 interface TradeListProps {
@@ -17,7 +17,7 @@ const TradeList = ({ trades }: TradeListProps) => {
                     <TradeCard key={`TradeCard-${index}`} trade={trade} />
                 ))
             ) : (
-                <EmptyState />
+                <NoTrades />
             )}
         </Box>
     );

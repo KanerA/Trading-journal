@@ -1,5 +1,6 @@
 import { Box, Divider } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
+import { format } from "date-fns";
 import EntryDataItem from "../TradeCard/EntryDataItem";
 
 interface TradeCardEntryDataProps {
@@ -15,9 +16,9 @@ const TradeCardEntryData = ({ entryAmount, entryDate, entryPrice }: TradeCardEnt
                 display: "flex",
             }}>
                 <EntryDataItem label="Entry Price" value={`$${entryPrice.toFixed(2)}`} />
-                <EntryDataItem label="Entry Date" value={entryDate} />
+                <EntryDataItem label="Entry Date" value={format(entryDate, "dd/MM/yyyy")} />
                 <EntryDataItem label="Amount" value={`${entryAmount} Shares`} />
-            </Box >
+            </Box>
             <Divider sx={{ my: 2 }} />
         </>
     );
