@@ -1,3 +1,4 @@
+import { compareAsc } from "date-fns";
 import * as yup from "yup";
 
 const getPositionExitSchema = (entryDateValue: string) => yup.object().shape({
@@ -7,7 +8,7 @@ const getPositionExitSchema = (entryDateValue: string) => yup.object().shape({
         if (!entryDateValue || !date) return true;
         const entryDateObj = new Date(entryDateValue);
         const exitDateObj = new Date(date);
-        return exitDateObj >= entryDateObj;
+        return compareAsc(exitDateObj, entryDateObj) !== -1;
 
     }),
 });
