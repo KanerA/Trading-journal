@@ -1,4 +1,3 @@
-import type { Outcome } from "./Outcome";
 
 export type PositionExit = {
     price: number;
@@ -6,7 +5,15 @@ export type PositionExit = {
     date: string;
 }
 
-export type PositionStatus = "Open" | "Closed";
+export enum PositionStatus {
+    Open = "Open",
+    Closed = "Closed"
+}
+
+export enum Outcome {
+    Winner = "winner",
+    Loser = "loser"
+}
 
 export type Trade = {
     ticker: string;

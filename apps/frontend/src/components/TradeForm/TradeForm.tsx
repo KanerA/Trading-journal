@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Paper } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import type { NewTradeFields, PositionStatus, Trade } from "@trading-journal/shared";
+import { Outcome, PositionStatus, type NewTradeFields, type Trade } from "@trading-journal/shared";
 import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -31,7 +31,7 @@ const calcPositionStatus = (entryAmount: number, exits: Trade["exits"]): Positio
         acc += curr.amount;
         return acc;
     }, 0);
-    return totalAmountSold < entryAmount ? "Open" : "Closed";
+    return totalAmountSold < entryAmount ? PositionStatus.Open : PositionStatus.Closed;
 }
 
 const defaultValuesForm: NewTradeFields = {
