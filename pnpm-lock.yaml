@@ -119,6 +119,9 @@ importers:
       '@prisma/client':
         specifier: ^6.11.1
         version: 6.11.1(prisma@6.11.1(typescript@5.8.3))(typescript@5.8.3)
+      '@trading-journal/shared':
+        specifier: workspace:*
+        version: link:../../shared
       reflect-metadata:
         specifier: ^0.2.0
         version: 0.2.2

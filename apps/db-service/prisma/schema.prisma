@@ -8,18 +8,24 @@ generator client {
     output   = "./generated/prisma"
 }
 
-model User {
-    id    Int     @id @default(autoincrement())
-    email String  @unique
-    name  String?
-    posts Post[]
+model Trade {
+    id            String @id
+    ticker        String
+    status        String
+    entryPrice    Float
+    outcome       String
+    entryDate     String
+    entryAmount   Int
+    pnl           Float
+    returnPercent Float
+    exits         Exit[]
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    title     String
-    content   String?
-    published Boolean? @default(false)
-    author    User?    @relation(fields: [authorId], references: [id])
-    authorId  Int?
+model Exit {
+    id      String @id
+    tradeId String
+    price   Float
+    amount  Int
+    date    String
+    trade   Trade  @relation(fields: [tradeId], references: [id])
 }
