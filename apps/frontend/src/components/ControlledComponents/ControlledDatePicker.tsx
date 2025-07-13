@@ -23,7 +23,7 @@ const ControlledDatePicker = ({ name, control, label, error, errorMessage }: Con
                         <DatePicker
                             defaultValue={new Date()}
                             disableFuture={true}
-                            onChange={(date) => field.onChange(date)}
+                            onChange={field.onChange}
                             format="dd/MM/yyyy"
                             slotProps={{
                                 textField: {
