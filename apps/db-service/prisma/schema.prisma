@@ -9,7 +9,7 @@ generator client {
 }
 
 model Trade {
-    id            String @id
+    id            String @id @default(uuid())
     ticker        String
     status        String
     entryPrice    Float
@@ -22,7 +22,7 @@ model Trade {
 }
 
 model Exit {
-    id      String @id
+    id      String @id @default(uuid())
     tradeId String
     price   Float
     amount  Int

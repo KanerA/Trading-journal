@@ -8,4 +8,8 @@ export class TradesService {
     async getAllTrades(): Promise<Trade[]> {
         return await this.tradesDbApiService.getAllTrades();
     }
+
+    async saveTrade(trade: Trade): Promise<void> {
+        return await this.tradesDbApiService.saveTrade(trade);
+    }
 }

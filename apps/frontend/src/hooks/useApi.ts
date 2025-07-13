@@ -8,11 +8,11 @@ export enum HttpMethod {
     DELETE = "delete",
 }
 
-export function useApiQuery(
+export const useApiQuery = (
     keys: string[],
     url: string,
     enabled = true
-) {
+) => {
     return useQuery<any>({
         queryKey: keys,
         queryFn: async () => {
@@ -23,11 +23,11 @@ export function useApiQuery(
     });
 }
 
-export function useApiMutation(
+export const useApiMutation = (
     url: string,
     method: HttpMethod = HttpMethod.POST,
     invalidateKey?: string[]
-) {
+) => {
     const queryClient = useQueryClient();
 
     return useMutation({

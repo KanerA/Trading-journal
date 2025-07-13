@@ -13,4 +13,18 @@ export class TradesRepository {
             }
         }) as unknown as Trade[];
     }
+
+    async saveTrade(trade: Trade) {
+        return this.databaseRepository.trade.create({
+            data: {
+                ...trade,
+                exits: {
+                    create: trade.exits,
+                },
+            },
+            include: {
+                exits: true,
+            }
+        });
+    }
 }

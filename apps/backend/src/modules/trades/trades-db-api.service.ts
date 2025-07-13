@@ -10,4 +10,9 @@ export class TradesDbApiService {
     async getAllTrades(): Promise<Trade[]> {
         return await this.dbApiService.requestWithData(this.httpService.get("/trades"))
     }
+
+    async saveTrade(trade: Trade): Promise<void> {
+        console.log({ trade })
+        return await this.dbApiService.requestWithData(this.httpService.post("/trades", trade));
+    }
 }

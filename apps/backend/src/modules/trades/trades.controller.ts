@@ -11,7 +11,7 @@ export class TradesController {
     }
 
     @Post("")
-    createTrade(@Body() trade: Trade): void {
-        console.log(trade)
+    async createTrade(@Body() trade: Trade): Promise<any> {
+        return await this.tradeService.saveTrade(trade)
     }
 }
