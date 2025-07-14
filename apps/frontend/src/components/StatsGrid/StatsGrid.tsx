@@ -6,14 +6,16 @@ import StatCard from './StatCard/StatCard';
 export default function StatsGrid() {
     // TODO: maybe create enum with labels and conditions for these cards
     // ?: maybe option to choose what currency is used
-    const mainStats = useSelector(getTradesStats)
+    const mainStats = useSelector(getTradesStats);
+
+    const labelColor = mainStats.totalPnL <= 0 ? "rgb(247, 0, 0)" : "rgb(2, 176, 2)";
 
     return (
         <Box sx={{ width: "95vw", margin: "auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5rem" }}>
-            <StatCard label="Total P&L" value={`$${mainStats.totalPnL.toFixed(2)}`} isWin={mainStats.totalPnL >= 0} />
-            <StatCard label="Win Rate" value={mainStats.winRate} />
-            <StatCard label="Winning Trades" value={mainStats.winners} isWin={mainStats.totalPnL >= 0} />
-            <StatCard label="Losing Trades" value={mainStats.losers} isWin={mainStats.totalPnL <= 0} />
+            <StatCard label="Total P&L" value={`$${mainStats.totalPnL.toFixed(2)}`} color={labelColor} />
+            <StatCard label="Win Rate" value={mainStats.winRate} color="black" />
+            <StatCard label="Winning Trades" value={mainStats.winners} color={"rgb(2, 176, 2)"} />
+            <StatCard label="Losing Trades" value={mainStats.losers} color={"rgb(247, 0, 0)"} />
         </Box>
     );
 }

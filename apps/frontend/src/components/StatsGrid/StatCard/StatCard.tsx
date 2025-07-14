@@ -3,10 +3,10 @@ import { Box, Typography } from "@mui/material";
 type StatCardProps = {
     label: string;
     value: string | number;
-    isWin?: boolean
+    color: "rgb(2, 176, 2)" | "rgb(247, 0, 0)" | "black"
 };
 
-const StatCard = ({ label, value, isWin }: StatCardProps) => {
+const StatCard = ({ label, value, color }: StatCardProps) => {
     return (
         <Box sx={{
             margin: "1rem 0",
@@ -19,7 +19,7 @@ const StatCard = ({ label, value, isWin }: StatCardProps) => {
             borderRadius: '10px',
         }}>
             <Typography>{label}</Typography>
-            <Typography variant="h5" sx={{ fontWeight: "bold", color: !(typeof isWin === "boolean") ? "black" : isWin ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)" }}>{value}</Typography>
+            <Typography variant="h5" sx={{ fontWeight: "bold", color: label === "Win Rate" ? "black" : color }}>{value}</Typography>
         </Box>
     );
 }
