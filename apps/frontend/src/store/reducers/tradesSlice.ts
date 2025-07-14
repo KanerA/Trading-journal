@@ -14,9 +14,10 @@ const tradesSlice = createSlice({
             const indexToRemove = state.findIndex(trade => trade.id === action.payload);
             if (indexToRemove === -1) return;
             state.splice(indexToRemove, 1);
-        }
+        },
+        initTrades: (state, action) => action.payload
     }
 })
 
-export const { addTrade, removeTrade } = tradesSlice.actions;
+export const { addTrade, removeTrade, initTrades } = tradesSlice.actions;
 export default tradesSlice.reducer;
