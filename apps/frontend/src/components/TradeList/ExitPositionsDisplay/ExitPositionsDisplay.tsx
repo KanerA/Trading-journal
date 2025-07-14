@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
-import { format } from "date-fns";
 
 interface ExitPositionsDisplayProps {
     exits: Trade["exits"]
@@ -36,7 +35,7 @@ const ExitPositionsDisplay = ({ exits }: ExitPositionsDisplayProps) => {
                     </Box>
                     <Box sx={{ display: "flex", justifyContent: "space-evenly", width: "100%" }}>
 
-                        <Typography sx={sharedTypographySx}>Date: </Typography><Typography sx={sharedTypographySx} fontWeight="bold">{format(exit.date, "dd/MM/yyy")}</Typography>
+                        <Typography sx={sharedTypographySx}>Date: </Typography><Typography sx={sharedTypographySx} fontWeight="bold">{exit.date}</Typography>
                     </Box>
                 </Box>
             ))}
