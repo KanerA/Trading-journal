@@ -12,7 +12,7 @@ const calcStats = (trades: Trade[]) => {
         if (acc.outcome === Outcome.Loser) prev["losers"] += 1;
         if (acc.outcome === Outcome.Winner) prev["winners"] += 1;
         prev.totalPnL += acc.pnl
-        prev.winRate = `${prev.winners / (prev.winners + prev.losers) * 100}%`;
+        prev.winRate = `${(prev.winners / (prev.winners + prev.losers) * 100).toFixed(2)}%`;
         return prev;
     }, { ...defaultStatsObject });
 }
