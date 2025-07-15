@@ -14,7 +14,7 @@ const TradeTotalDisplay = ({ pnl, returnPercent }: TradeTotalDisplayProps) => {
                 <Typography sx={{ color: `${+pnl > 0 ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)"}` }}>${pnl.toFixed(2)}</Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }}>
-                <Typography sx={{ marginBottom: 1 }}>Return %</Typography>
+                <Typography sx={{ marginBottom: 1 }}>Avg. Return %</Typography>
                 <Typography sx={{ color: `${+returnPercent > 0 ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)"}` }}>{returnPercent.toFixed(2)}%</Typography>
             </Box>
         </Box>
