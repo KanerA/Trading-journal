@@ -1,27 +1,30 @@
 import { Box, Divider } from "@mui/material";
-import type { NewTradeFields, PositionExit } from "@trading-journal/shared";
-import { AddTradeExitsLabels } from "@trading-journal/shared/enums";
-import type { FieldArrayWithId } from "react-hook-form";
+import { type NewTradeFields, type PositionExit, AddTradeExitsLabels } from "@trading-journal/shared";
+import type { FieldErrors } from "react-hook-form";
+import ControlledDatePicker from "../../../ControlledComponents/ControlledDatePicker";
 import ControlledTextField from "../../../ControlledComponents/ControlledTextField";
 
 interface TradeExitProps {
-    field: FieldArrayWithId<NewTradeFields, "exits", "id">,
-    errors: any,
-    control: any
+    exit?: PositionExit, // Keep for editing existing exits
+    errors: FieldErrors<NewTradeFields>["exits"],
+    control: any,
+    exitItemIndex: number
 }
 
-const TradeFormExit = ({ field, errors, control }: TradeExitProps) => {
+const TradeFormExit = ({ errors, control, exitItemIndex }: TradeExitProps) => {
     return (
         <>
             <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", padding: '0 2rem 1rem 2rem' }} >
                 {
-                    (Object.keys(field) as (keyof PositionExit)[]).map((val, index: number) => {
+                    (Object.keys(AddTradeExitsLabels) as (keyof PositionExit)[]).map((val) => {
                         if (!AddTradeExitsLabels[val]) return
-                        const isError = !!errors?.[index]?.[val];
-                        const errorMessage = errors?.[index]?.[val]?.message || ""
-                        return <Box key={val}>
-                            <ControlledTextField control={control} label={AddTradeExitsLabels[val]} name={`exits.${index}.${val}`} error={!!isError} errorMessage={errorMessage} />
-                        </Box>
+                        const isError = !!errors?.[exitItemIndex]?.[val];
+                        const errorMessage = errors?.[exitItemIndex]?.[val]?.message || "";
+                        if (val === "date") {
+                            return <ControlledDatePicker key={val} control={control} label={AddTradeExitsLabels[val]} name={`exits.${exitItemIndex}.${val}`} error={isError} errorMessage={errorMessage} />
+                        }
+                        return <ControlledTextField key={val} control={control} label={AddTradeExitsLabels[val]} name={`exits.${exitItemIndex}.${val}`} error={isError} errorMessage={errorMessage} />
+
                     })
                 }
             </Box>

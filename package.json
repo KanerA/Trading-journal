@@ -6,6 +6,7 @@
   "scripts": {
     "dev:frontend": "pnpm --filter frontend dev",
     "dev:backend": "pnpm --filter backend start:dev",
+    "dev:db-service": "pnpm --filter db-service start:dev",
     "dev:all": "pnpm run dev:frontend & pnpm run dev:backend"
   },
   "keywords": [],

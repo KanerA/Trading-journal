@@ -1,14 +1,14 @@
 import type { NewTradeFields, PositionExit } from "../types";
 
 export const AddTradeEntryLabels: Record<keyof Omit<NewTradeFields, "exits">, string> = {
-    entryAmount: "Entry Amount",
-    entryDate: "Entry Date",
-    entryPrice: "Entry Price",
     ticker: "Stock Symbol",
+    sharesBought: "Shares Bought",
+    entryPrice: "Price",
+    entryDate: "Entry Date",
 }
 
 export const AddTradeExitsLabels: Record<keyof PositionExit, string> = {
-    amount: "Amount",
+    amount: "Shares Sold",
+    price: "Price",
     date: "Exit Date",
-    price: "Price"
 }

@@ -1,19 +1,21 @@
 import { Box } from '@mui/material';
-import type { MainStats } from '../../pages/MainPage';
+import { useSelector } from 'react-redux';
+import { getTradesStats } from '../../store/selectors/tradeSelector';
 import StatCard from './StatCard/StatCard';
 
-interface StatsGridProps {
-    mainStats: MainStats
-}
-
-export default function StatsGrid({ mainStats: { losers, totalPnL, winRate, winners } }: StatsGridProps) {
+export default function StatsGrid() {
     // TODO: maybe create enum with labels and conditions for these cards
+    // ?: maybe option to choose what currency is used
+    const mainStats = useSelector(getTradesStats);
+
+    const labelColor = mainStats.totalPnL <= 0 ? "rgb(247, 0, 0)" : "rgb(2, 176, 2)";
+
     return (
         <Box sx={{ width: "95vw", margin: "auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5rem" }}>
-            <StatCard label="Total P&L" value={totalPnL} isWin={totalPnL >= 0} />
-            <StatCard label="Win Rate" value={winRate} />
-            <StatCard label="Winning Trades" value={winners} isWin={totalPnL >= 0} />
-            <StatCard label="Losing Trades" value={losers} isWin={totalPnL <= 0} />
+            <StatCard label="Total P&L" value={`$${mainStats.totalPnL.toFixed(2)}`} color={labelColor} />
+            <StatCard label="Win Rate" value={mainStats.winRate} color="black" />
+            <StatCard label="Winning Trades" value={mainStats.winners} color={"rgb(2, 176, 2)"} />
+            <StatCard label="Losing Trades" value={mainStats.losers} color={"rgb(247, 0, 0)"} />
         </Box>
     );
 }

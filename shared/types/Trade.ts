@@ -1,4 +1,3 @@
-import type { Outcome } from "./Outcome";
 
 export type PositionExit = {
     price: number;
@@ -6,13 +5,24 @@ export type PositionExit = {
     date: string;
 }
 
+export enum PositionStatus {
+    Open = "Open",
+    Closed = "Closed"
+}
+
+export enum Outcome {
+    Winner = "winner",
+    Loser = "loser"
+}
+
 export type Trade = {
+    id: string;
     ticker: string;
-    status: 'Closed' | 'Open';
+    status: PositionStatus;
     outcome: Outcome;
     entryPrice: number;
     entryDate: string;
-    amount: number;
+    sharesBought: number;
     exits: PositionExit[];
     pnl: number;
     returnPercent: number;
@@ -21,7 +31,7 @@ export type Trade = {
 export interface NewTradeFields {
     ticker: string,
     entryPrice: number,
-    entryDate: Date,
-    entryAmount: number,
+    entryDate: string,
+    sharesBought: number,
     exits: PositionExit[]
 }

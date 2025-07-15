@@ -17,7 +17,7 @@ const ExitPositionsDisplay = ({ exits }: ExitPositionsDisplayProps) => {
         <Box>
             <Typography variant="h5">Exit Positions</Typography>
             {exits.length > 0 && exits.map((exit, index) => (
-                <Box sx={{
+                <Box key={`exit-${index}`} sx={{
                     display: "flex",
                     alignItems: "center",
                     height: "2rem",
@@ -26,10 +26,17 @@ const ExitPositionsDisplay = ({ exits }: ExitPositionsDisplayProps) => {
                     paddingLeft: "1rem",
                     backgroundColor: "#eff4ff",
                 }}>
-                    {/** TODO: Combine all to const or something to map instead of hard coded */}
-                    <Typography sx={sharedTypographySx}>Exit #{index + 1}: <Typography fontWeight="bold">${exit.price.toFixed(2)}</Typography></Typography>
-                    <Typography sx={sharedTypographySx}>Amount: <Typography fontWeight="bold">{exit.amount} shares</Typography></Typography>
-                    <Typography sx={sharedTypographySx}>Date: <Typography fontWeight="bold">{exit.date}</Typography></Typography>
+                    <Box sx={{ display: "flex", width: "100%" }}>
+                        <Typography sx={sharedTypographySx}>Exit #{index + 1}: </Typography><Typography sx={sharedTypographySx} fontWeight="bold">${exit.price.toFixed(2)}</Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", width: "100%" }}>
+
+                        <Typography sx={sharedTypographySx}>Amount: </Typography><Typography sx={sharedTypographySx} fontWeight="bold">{exit.amount} shares</Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "space-evenly", width: "100%" }}>
+
+                        <Typography sx={sharedTypographySx}>Date: </Typography><Typography sx={sharedTypographySx} fontWeight="bold">{exit.date}</Typography>
+                    </Box>
                 </Box>
             ))}
 

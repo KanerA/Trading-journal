@@ -1,0 +1,31 @@
+datasource db {
+    url      = env("DATABASE_URL")
+    provider = "postgresql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "./generated/prisma"
+}
+
+model Trade {
+    id            String @id @default(uuid())
+    ticker        String
+    status        String
+    entryPrice    Float
+    outcome       String
+    entryDate     String
+    sharesBought  Int
+    pnl           Float
+    returnPercent Float
+    exits         Exit[]
+}
+
+model Exit {
+    id      String @id @default(uuid())
+    tradeId String
+    price   Float
+    amount  Int
+    date    String
+    trade   Trade  @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+}

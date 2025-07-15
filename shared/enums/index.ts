@@ -1,2 +1,2 @@
-export * from './TradeFields.ts';
+export * from './TradeFields';
 

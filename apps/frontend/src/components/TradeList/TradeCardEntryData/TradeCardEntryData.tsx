@@ -5,10 +5,10 @@ import EntryDataItem from "../TradeCard/EntryDataItem";
 interface TradeCardEntryDataProps {
     entryPrice: Trade["entryPrice"],
     entryDate: Trade["entryDate"],
-    amount: Trade["amount"]
+    sharesBought: Trade["sharesBought"]
 }
 
-const TradeCardEntryData = ({ amount, entryDate, entryPrice }: TradeCardEntryDataProps) => {
+const TradeCardEntryData = ({ sharesBought, entryDate, entryPrice }: TradeCardEntryDataProps) => {
     return (
         <>
             <Box sx={{
@@ -16,8 +16,8 @@ const TradeCardEntryData = ({ amount, entryDate, entryPrice }: TradeCardEntryDat
             }}>
                 <EntryDataItem label="Entry Price" value={`$${entryPrice.toFixed(2)}`} />
                 <EntryDataItem label="Entry Date" value={entryDate} />
-                <EntryDataItem label="Amount" value={`${amount} Shares`} />
-            </Box >
+                <EntryDataItem label="Amount" value={`${sharesBought} Shares`} />
+            </Box>
             <Divider sx={{ my: 2 }} />
         </>
     );
