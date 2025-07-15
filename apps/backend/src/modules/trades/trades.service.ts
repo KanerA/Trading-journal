@@ -12,4 +12,8 @@ export class TradesService {
     async saveTrade(trade: Trade): Promise<void> {
         return await this.tradesDbApiService.saveTrade(trade);
     }
+
+    async deleteTrade(tradeId: string): Promise<void> {
+        return await this.tradesDbApiService.deleteTrade(tradeId);
+    }
 }

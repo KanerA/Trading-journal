@@ -12,7 +12,10 @@ export class TradesDbApiService {
     }
 
     async saveTrade(trade: Trade): Promise<void> {
-        console.log({ trade })
         return await this.dbApiService.requestWithData(this.httpService.post("/trades", trade));
+    }
+
+    async deleteTrade(tradeId: string): Promise<void> {
+        await this.dbApiService.request(this.httpService.delete(`/trades/${tradeId}`));
     }
 }

@@ -15,4 +15,8 @@ export class TradesService {
     async saveTrade(trade: Trade) {
         return this.tradesRepository.saveTrade(trade);
     }
+
+    async deleteTrade(tradeId: string) {
+        return this.tradesRepository.deleteTrade(tradeId);
+    }
 }

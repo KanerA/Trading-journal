@@ -27,4 +27,13 @@ export class TradesRepository {
             }
         });
     }
+
+    async deleteTrade(tradeId: string) {
+        this.databaseRepository.exit.deleteMany({ where: { tradeId } })
+        return this.databaseRepository.trade.delete({
+            where: {
+                id: tradeId
+            },
+        })
+    }
 }
