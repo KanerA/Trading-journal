@@ -22,7 +22,7 @@ export type Trade = {
     outcome: Outcome;
     entryPrice: number;
     entryDate: string;
-    entryAmount: number;
+    sharesBought: number;
     exits: PositionExit[];
     pnl: number;
     returnPercent: number;
@@ -32,6 +32,6 @@ export interface NewTradeFields {
     ticker: string,
     entryPrice: number,
     entryDate: string,
-    entryAmount: number,
+    sharesBought: number,
     exits: PositionExit[]
 }

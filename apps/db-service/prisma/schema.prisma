@@ -15,7 +15,7 @@ model Trade {
     entryPrice    Float
     outcome       String
     entryDate     String
-    entryAmount   Int
+    sharesBought  Int
     pnl           Float
     returnPercent Float
     exits         Exit[]
@@ -27,5 +27,5 @@ model Exit {
     price   Float
     amount  Int
     date    String
-    trade   Trade  @relation(fields: [tradeId], references: [id])
+    trade   Trade  @relation(fields: [tradeId], references: [id], onDelete: Cascade)
 }

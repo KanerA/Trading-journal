@@ -3,6 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, Chip, IconButton, Typography } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
 import { useDispatch } from "react-redux";
+import { useDeleteTrade } from "../../../hooks/useDeleteTrade";
 import { removeTrade } from "../../../store/reducers/tradesSlice";
 
 interface TradeCardHeaderProps {
@@ -22,7 +23,8 @@ const sharedChipSx = {
 }
 
 const TradeCardHeader = ({ tradeId, outcome, status, ticker }: TradeCardHeaderProps) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const mutateDeleteTrade = useDeleteTrade();
     return (
         <Box sx={{
             display: "flex"
@@ -38,7 +40,10 @@ const TradeCardHeader = ({ tradeId, outcome, status, ticker }: TradeCardHeaderPr
             </Box>
             <Box>
                 <IconButton><EditIcon sx={{ color: "black" }} /></IconButton>
-                <IconButton><DeleteOutlineIcon sx={{ color: "black" }} onClick={() => dispatch(removeTrade(tradeId))} /></IconButton>
+                <IconButton><DeleteOutlineIcon sx={{ color: "black" }} onClick={() => {
+                    dispatch(removeTrade(tradeId));
+                    mutateDeleteTrade(tradeId)
+                }} /></IconButton>
             </Box>
         </Box>
     );

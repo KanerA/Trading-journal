@@ -40,7 +40,7 @@ const defaultValuesForm: NewTradeFields = {
     ticker: "",
     entryPrice: 0,
     entryDate: format(new Date(), "dd/MM/yyyy"),
-    entryAmount: 0,
+    sharesBought: 0,
     exits: [{
         price: 0,
         date: format(new Date(), "dd/MM/yyyy"),
@@ -67,14 +67,14 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
     const onSubmit = async (data: NewTradeFields) => {
         // TODO: add id to exits
         console.log("Submitted:", data);
-        const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.entryAmount, data.exits)
+        const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.sharesBought, data.exits)
         const generatedData: Trade = {
             ...data,
             id: uuidv4(),
             outcome: pnl >= 0 ? Outcome.Winner : Outcome.Loser,
             pnl,
             returnPercent,
-            status: calcPositionStatus(data.entryAmount, data.exits),
+            status: calcPositionStatus(data.sharesBought, data.exits),
         }
         const savedTrade = await saveTrade(generatedData);
         console.log({ savedTrade })
