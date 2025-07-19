@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import './App.css'
 import AddTradeModal from './components/AddTradeModal/AddTradeModal'
@@ -12,15 +12,6 @@ function App() {
   const { data } = useGetAllTrades();
   const dispatch = useDispatch();
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalTitle, setModalTitle] = useState<string>("")
-  const openModal = (title: string) => {
-    setIsModalOpen(true);
-    setModalTitle(title)
-  }
-  const closeModal = () => setIsModalOpen(false)
-
-
   useEffect(() => {
     if (data) {
       dispatch(initTrades(data))
@@ -28,9 +19,9 @@ function App() {
   }, [data]);
   return (
     <Box sx={{ backgroundColor: "#eff4ff", minHeight: "100vh", padding: "1rem" }}>
-      <Header openModal={openModal} />
+      <Header />
       <MainPage />
-      <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} modalTitle={modalTitle} />
+      <AddTradeModal />
     </Box>
   )
 }

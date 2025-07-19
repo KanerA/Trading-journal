@@ -3,7 +3,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, Chip, IconButton, Typography } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
 import { useDispatch } from "react-redux";
+import { TradeModalTitles } from "../../../enums/tradeModal";
 import { useDeleteTrade } from "../../../hooks/useDeleteTrade";
+import { openModalEditMode } from "../../../store/reducers/modalSlice";
 import { removeTrade } from "../../../store/reducers/tradesSlice";
 
 interface TradeCardHeaderProps {
@@ -25,6 +27,16 @@ const sharedChipSx = {
 const TradeCardHeader = ({ tradeId, outcome, status, ticker }: TradeCardHeaderProps) => {
     const dispatch = useDispatch();
     const mutateDeleteTrade = useDeleteTrade();
+
+    const onClickEdit = () => {
+        dispatch(openModalEditMode({ title: TradeModalTitles.EditTrade, tradeId }))
+    }
+
+    const onClickDelete = () => {
+        dispatch(removeTrade(tradeId));
+        mutateDeleteTrade(tradeId)
+    }
+
     return (
         <Box sx={{
             display: "flex"
@@ -39,11 +51,8 @@ const TradeCardHeader = ({ tradeId, outcome, status, ticker }: TradeCardHeaderPr
                 <Chip size="small" variant="outlined" label={outcome} sx={{ ...sharedChipSx, backgroundColor: outcome === "winner" ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)", fontWeight: 600 }} />
             </Box>
             <Box>
-                <IconButton><EditIcon sx={{ color: "black" }} /></IconButton>
-                <IconButton><DeleteOutlineIcon sx={{ color: "black" }} onClick={() => {
-                    dispatch(removeTrade(tradeId));
-                    mutateDeleteTrade(tradeId)
-                }} /></IconButton>
+                <IconButton><EditIcon onClick={onClickEdit} sx={{ color: "black" }} /></IconButton>
+                <IconButton><DeleteOutlineIcon sx={{ color: "black" }} onClick={onClickDelete} /></IconButton>
             </Box>
         </Box>
     );
