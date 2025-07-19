@@ -23,7 +23,7 @@ const Tabs = ({ trades }: TabsProps) => {
             width: '100%',
         }}>
             <Box sx={{
-                width: '98vw',
+                width: '100%',
                 display: 'flex',
                 margin: 'auto',
             }}>

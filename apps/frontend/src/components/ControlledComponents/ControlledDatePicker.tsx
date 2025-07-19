@@ -1,6 +1,7 @@
 import { Box, FormLabel } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import type { NewTradeFields } from '@trading-journal/shared';
+import { format } from 'date-fns';
 import { Controller, type Control, type Path } from 'react-hook-form';
 
 interface ControlledDatePickerProps {
@@ -23,7 +24,11 @@ const ControlledDatePicker = ({ name, control, label, error, errorMessage }: Con
                         <DatePicker
                             defaultValue={new Date()}
                             disableFuture={true}
-                            onChange={field.onChange}
+                            onChange={(val) => {
+                                // TODO: fix date handling throughout the app
+                                if (!val) return field.onChange(val)
+                                field.onChange(format(val.toDateString(), "dd/MM/yyy"))
+                            }}
                             format="dd/MM/yyyy"
                             slotProps={{
                                 textField: {
