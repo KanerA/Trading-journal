@@ -3,11 +3,8 @@ import { useDispatch } from "react-redux";
 import { TradeModalTitles } from "../../enums/tradeModal";
 import { openModal } from "../../store/reducers/modalSlice";
 
-interface HeaderProps {
 
-}
-
-export default function Header({ }: HeaderProps) {
+export default function Header() {
     const dispatch = useDispatch();
 
     const openModalHandler = (title: TradeModalTitles) => {

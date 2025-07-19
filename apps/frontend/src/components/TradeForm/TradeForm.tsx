@@ -6,11 +6,10 @@ import { Outcome, PositionStatus, type NewTradeFields, type Trade } from "@tradi
 import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { getSchema } from "../../formValidation/yupSchema";
 import { useSaveTrade } from "../../hooks/useSaveTrade";
-import { addTrade } from "../../store/reducers/tradesSlice";
 import { getEditTradeId } from "../../store/selectors/modalSelectors";
 import { getTradeById } from "../../store/selectors/tradeSelector";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
@@ -51,7 +50,6 @@ const getFormValues = (trade: Trade | null) => ({
 })
 
 const TradeForm: React.FC<AddTradeFormProps> = ({ onCloseModal }) => {
-    const dispatch = useDispatch();
     const saveTrade = useSaveTrade();
 
     const editTradeId = useSelector(getEditTradeId)
@@ -72,7 +70,6 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ onCloseModal }) => {
     });
 
     const onSubmit = async (data: NewTradeFields) => {
-        // TODO: add id to exits
         console.log("Submitted:", data);
         const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.sharesBought, data.exits)
         const generatedData: Trade = {
@@ -83,8 +80,7 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ onCloseModal }) => {
             returnPercent,
             status: calcPositionStatus(data.sharesBought, data.exits),
         }
-        const savedTrade = await saveTrade(generatedData);
-        dispatch(addTrade(generatedData));
+        await saveTrade(generatedData);
         onCloseModal();
     };
 

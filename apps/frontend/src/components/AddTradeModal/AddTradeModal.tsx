@@ -5,9 +5,8 @@ import { closeModal } from "../../store/reducers/modalSlice";
 import { getIsModalOpen, getModalTitle } from "../../store/selectors/modalSelectors";
 import TradeForm from "../TradeForm/TradeForm";
 
-interface AddTradeModalProps { }
 
-const AddTradeModal = ({ }: AddTradeModalProps) => {
+const AddTradeModal = () => {
     const dispatch = useDispatch();
     const modalTitle = useSelector(getModalTitle)
 
