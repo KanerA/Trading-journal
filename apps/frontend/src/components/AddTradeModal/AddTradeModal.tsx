@@ -2,15 +2,14 @@
 import { Dialog, DialogTitle } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/reducers/modalSlice";
-import { getIsModalOpen } from "../../store/selectors/modalSelectors";
+import { getIsModalOpen, getModalTitle } from "../../store/selectors/modalSelectors";
 import TradeForm from "../TradeForm/TradeForm";
 
-interface AddTradeModalProps {
-    modalTitle: string
-}
+interface AddTradeModalProps { }
 
-const AddTradeModal = ({ modalTitle }: AddTradeModalProps) => {
+const AddTradeModal = ({ }: AddTradeModalProps) => {
     const dispatch = useDispatch();
+    const modalTitle = useSelector(getModalTitle)
 
     const isModalOpen = useSelector(getIsModalOpen);
     const closeModalHandler = () => dispatch(closeModal())
