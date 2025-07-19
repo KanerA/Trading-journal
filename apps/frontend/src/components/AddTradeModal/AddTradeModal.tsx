@@ -1,13 +1,14 @@
 
-import { Dialog } from "@mui/material";
+import { Dialog, DialogTitle } from "@mui/material";
 import TradeForm from "../TradeForm/TradeForm";
 
 interface AddTradeModalProps {
     closeModal: () => void;
     isModalOpen: boolean;
+    modalTitle: string
 }
 
-const AddTradeModal = ({ isModalOpen, closeModal }: AddTradeModalProps) => {
+const AddTradeModal = ({ isModalOpen, closeModal, modalTitle }: AddTradeModalProps) => {
 
     return (
         <Dialog scroll="paper"
@@ -26,6 +27,9 @@ const AddTradeModal = ({ isModalOpen, closeModal }: AddTradeModalProps) => {
                 },
             }}
         >
+            <DialogTitle sx={{ m: 0, paddingBottom: 0, fontSize: "2rem" }}>
+                {modalTitle}
+            </DialogTitle>
             <TradeForm closeModal={closeModal} />
         </Dialog >
     );

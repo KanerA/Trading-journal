@@ -1,4 +1,4 @@
-import { Box, DialogTitle, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { type NewTradeFields, AddTradeEntryLabels } from "@trading-journal/shared";
 import { type Control, type FieldErrors } from "react-hook-form";
 import ControlledDatePicker from "../../ControlledComponents/ControlledDatePicker";
@@ -12,9 +12,6 @@ interface TradeFormEntryDataProps {
 const TradeFormEntryContainer = ({ control, errors }: TradeFormEntryDataProps) => {
     return (
         <Box>
-            <DialogTitle sx={{ m: 0, paddingTop: 0, paddingLeft: 0, fontSize: "1.5rem" }}>
-                Add New Trade
-            </DialogTitle>
             <Grid container spacing={2}>
                 {
                     (Object.keys(AddTradeEntryLabels) as (keyof NewTradeFields)[]).map((val) => {

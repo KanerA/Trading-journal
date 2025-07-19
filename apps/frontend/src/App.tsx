@@ -13,7 +13,11 @@ function App() {
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const openModal = () => setIsModalOpen(true)
+  const [modalTitle, setModalTitle] = useState<string>("")
+  const openModal = (title: string) => {
+    setIsModalOpen(true);
+    setModalTitle(title)
+  }
   const closeModal = () => setIsModalOpen(false)
 
 
@@ -26,7 +30,7 @@ function App() {
     <Box sx={{ backgroundColor: "#eff4ff", minHeight: "100vh", padding: "1rem" }}>
       <Header openModal={openModal} />
       <MainPage />
-      <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} />
+      <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} modalTitle={modalTitle} />
     </Box>
   )
 }
