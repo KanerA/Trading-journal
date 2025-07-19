@@ -1,25 +1,31 @@
 import { Box, Button, Typography } from '@mui/material';
 import type { NewTradeFields } from '@trading-journal/shared';
-import { format } from 'date-fns';
-import { useState } from 'react';
-import { type Control, type FieldErrors } from 'react-hook-form';
+import { useFieldArray, type Control, type FieldErrors } from 'react-hook-form';
 import TradeFormExits from '../TradeFormExits/TradeFormExits';
 
 interface TradeFormExitsContainerProps {
     control: Control<NewTradeFields>
     errors: FieldErrors<NewTradeFields>["exits"]
+    exits: any[]
 }
 
-const defaultExit = {
-    price: 0,
-    date: format(new Date(), "dd/MM/yyyy"),
-    amount: 0,
-};
-
 const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerProps) => {
-    const [exitsInputs, setExitsInputs] = useState<NewTradeFields["exits"]>([defaultExit]);
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "exits"
+    });
 
-    const addNewExitInput = () => setExitsInputs([...exitsInputs, defaultExit]);
+    const addNewExitInput = () => {
+        append({
+            price: 0,
+            amount: 0,
+            date: new Date().toDateString()
+        })
+    };
+
+    const onClickDeleteExit = (index: number) => {
+        remove(index)
+    }
 
     return (
         <Box>
@@ -32,7 +38,7 @@ const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerPro
                 </Button>
             </Box>
 
-            <TradeFormExits control={control} errors={errors} exits={exitsInputs} />
+            <TradeFormExits control={control} errors={errors} exits={fields} onClickDeleteExit={onClickDeleteExit} />
 
             <Box>
                 <Button type="submit" variant="contained">

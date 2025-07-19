@@ -3,10 +3,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, Chip, IconButton, Typography } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
 import { useDispatch } from "react-redux";
-import { TradeModalTitles } from "src/enums/tradeModal";
-import { useDeleteTrade } from "src/hooks/useDeleteTrade";
-import { openModalEditMode } from "src/store/reducers/modalSlice";
-import { removeTrade } from "src/store/reducers/tradesSlice";
+import { TradeModalTitles } from "../../../enums/tradeModal";
+import { useDeleteTrade } from "../../../hooks/useDeleteTrade";
+import { openModalEditMode } from "../../../store/reducers/modalSlice";
+import { removeTrade } from "../../../store/reducers/tradesSlice";
 
 interface TradeCardHeaderProps {
     tradeId: Trade["id"],

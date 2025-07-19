@@ -4,13 +4,13 @@ import { TradeModalTitles } from "../../enums/tradeModal";
 interface ModalState {
     isOpen: boolean,
     title: TradeModalTitles,
-    editTradeId: string
+    editTradeId: string | null
 }
 
 const initialState: ModalState = {
     isOpen: false,
     title: TradeModalTitles.CreateTrade,
-    editTradeId: ""
+    editTradeId: null
 }
 
 const modalSlice = createSlice({
@@ -22,7 +22,8 @@ const modalSlice = createSlice({
             state.title = action.payload
         },
         closeModal: (state) => {
-            state.isOpen = false
+            state.isOpen = false;
+            state.editTradeId = null
         },
         openModalEditMode: (state, action: PayloadAction<{ title: TradeModalTitles, tradeId: string }>) => {
             state.isOpen = true;
