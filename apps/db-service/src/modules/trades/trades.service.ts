@@ -13,7 +13,7 @@ export class TradesService {
     }
 
     async saveTrade(trade: Trade) {
-        return this.tradesRepository.saveTrade(trade);
+        return this.tradesRepository.upsertTrade(trade);
     }
 
     async deleteTrade(tradeId: string) {
