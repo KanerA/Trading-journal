@@ -3,6 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, Chip, IconButton, Typography } from "@mui/material";
 import type { Trade } from "@trading-journal/shared";
 import { useDispatch } from "react-redux";
+import { Colors } from "../../../enums/colors";
 import { TradeModalTitles } from "../../../enums/tradeModal";
 import { useDeleteTrade } from "../../../hooks/useDeleteTrade";
 import { openModalEditMode } from "../../../store/reducers/modalSlice";
@@ -14,8 +15,6 @@ interface TradeCardHeaderProps {
     status: Trade["status"],
     outcome: Trade["outcome"],
 }
-
-// TODO: create const for win / lose colors : rgb(247, 0, 0), rgb(2, 176, 2)
 
 const sharedChipSx = {
     borderRadius: "15px",
@@ -48,7 +47,7 @@ const TradeCardHeader = ({ tradeId, outcome, status, ticker }: TradeCardHeaderPr
             }}>
                 <Typography variant="h5" sx={{ fontWeight: "bold" }}>{ticker}</Typography>
                 <Chip size="small" variant="outlined" label={status} sx={sharedChipSx} />
-                <Chip size="small" variant="outlined" label={outcome} sx={{ ...sharedChipSx, backgroundColor: outcome === "winner" ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)", fontWeight: 600 }} />
+                <Chip size="small" variant="outlined" label={outcome} sx={{ ...sharedChipSx, backgroundColor: outcome === "winner" ? Colors.Win : Colors.Lose, fontWeight: 600 }} />
             </Box>
             <Box>
                 <IconButton><EditIcon onClick={onClickEdit} sx={{ color: "black" }} /></IconButton>

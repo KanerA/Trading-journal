@@ -1,9 +1,10 @@
 import { Box, Typography } from "@mui/material";
+import type { Colors } from "src/enums/colors";
 
 type StatCardProps = {
     label: string;
     value: string | number;
-    color: "rgb(2, 176, 2)" | "rgb(247, 0, 0)" | "black"
+    color: Colors | "black"
 };
 
 const StatCard = ({ label, value, color }: StatCardProps) => {
