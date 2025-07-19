@@ -12,11 +12,10 @@ interface AddTradeExitProps {
 }
 
 const TradeFormExits = ({ control, errors, exits, onClickDeleteExit }: AddTradeExitProps) => {
-
     return (
         <Paper elevation={2} sx={{ marginTop: "0.8rem" }}>
             {exits.map((exit, index) => (
-                <Box key={"field.id" + index}>
+                <Box key={exit.id}>
                     <TradeFormExitHeader exitNumber={index + 1} onClickDeleteExit={onClickDeleteExit} />
                     <TradeFormExit control={control} errors={errors} exit={exit} exitItemIndex={index} />
                 </Box>

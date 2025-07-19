@@ -1,5 +1,6 @@
 
 export type PositionExit = {
+    id?: string;
     price: number;
     amount: number;
     date: string;
@@ -29,6 +30,7 @@ export type Trade = {
 };
 
 export interface NewTradeFields {
+    id?: string,
     ticker: string,
     entryPrice: number,
     entryDate: string,

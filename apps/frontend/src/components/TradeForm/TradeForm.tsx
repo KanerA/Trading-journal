@@ -71,14 +71,16 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ onCloseModal }) => {
 
     const onSubmit = async (data: NewTradeFields) => {
         console.log("Submitted:", data);
-        const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.sharesBought, data.exits)
+        const exitsWithId = data.exits.map(exit => ({ ...exit, id: uuidv4() }))
+        const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.sharesBought, exitsWithId)
         const generatedData: Trade = {
             ...data,
             id: tradeToEdit?.id || uuidv4(),
+            exits: exitsWithId,
             outcome: pnl >= 0 ? Outcome.Winner : Outcome.Loser,
             pnl,
             returnPercent,
-            status: calcPositionStatus(data.sharesBought, data.exits),
+            status: calcPositionStatus(data.sharesBought, exitsWithId),
         }
         await saveTrade(generatedData);
         onCloseModal();

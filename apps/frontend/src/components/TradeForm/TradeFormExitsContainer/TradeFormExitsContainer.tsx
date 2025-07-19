@@ -16,8 +16,6 @@ const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerPro
         name: "exits"
     });
 
-    console.log({ fields })
-
     const addNewExitInput = () => {
         append({
             price: 0,
