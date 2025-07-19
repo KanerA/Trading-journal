@@ -22,3 +22,5 @@ export const getAllTrades = (state: RootState) => state.trades;
 export const getTradesStats = (state: RootState) => {
     return calcStats(state.trades)
 }
+
+export const getTradeById = (tradeId: string | null) => (state: RootState) => tradeId ? (state.trades.find(val => val.id === tradeId) || null) : null

@@ -1,10 +1,15 @@
 import { Box, Button, Card, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { TradeModalTitles } from "../../enums/tradeModal";
+import { openModal } from "../../store/reducers/modalSlice";
 
-interface HeaderProps {
-    openModal: (modalTitle: string) => void;
-}
 
-export default function Header({ openModal }: HeaderProps) {
+export default function Header() {
+    const dispatch = useDispatch();
+
+    const openModalHandler = (title: TradeModalTitles) => {
+        dispatch(openModal(title))
+    }
     return (
         <Card
             sx={{
@@ -27,7 +32,7 @@ export default function Header({ openModal }: HeaderProps) {
                     <Typography>Track and analyze your stock trades</Typography>
                 </Box>
             </Box>
-            <Button variant="contained" onClick={() => openModal("Create New Trade")}>
+            <Button variant="contained" onClick={() => openModalHandler(TradeModalTitles.CreateTrade)}>
                 + Add New Trade
             </Button>
         </Card>

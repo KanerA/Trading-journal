@@ -14,6 +14,43 @@ export class TradesRepository {
         }) as unknown as Trade[];
     }
 
+    async upsertTrade(trade: Trade) {
+        const formattedExits = trade.exits.map(exit => ({ ...exit, tradeId: undefined }))
+        await this.databaseRepository.trade.upsert({
+            where: { id: trade.id },
+            create: {
+                ...trade,
+                exits: {
+                    create: formattedExits,
+                },
+            },
+            update: {
+                ...trade,
+                exits: undefined,
+            },
+            include: {
+                exits: true,
+            }
+        });
+
+        await this.databaseRepository.exit.deleteMany({
+            where: { tradeId: trade.id }
+        });
+
+        await this.databaseRepository.exit.createMany({
+            data: trade.exits.map(exit => ({
+                ...exit,
+                tradeId: trade.id,
+            })),
+        });
+
+        return this.databaseRepository.trade.findUnique({
+            where: { id: trade.id },
+            include: { exits: true },
+        });
+    }
+
+
     async saveTrade(trade: Trade) {
         return this.databaseRepository.trade.create({
             data: {
