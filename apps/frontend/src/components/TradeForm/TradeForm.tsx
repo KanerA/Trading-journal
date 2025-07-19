@@ -6,16 +6,17 @@ import { Outcome, PositionStatus, type NewTradeFields, type Trade } from "@tradi
 import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { getSchema } from "../../formValidation/yupSchema";
 import { useSaveTrade } from "../../hooks/useSaveTrade";
-import { addTrade } from "../../store/reducers/tradesSlice";
+import { getEditTradeId } from "../../store/selectors/modalSelectors";
+import { getTradeById } from "../../store/selectors/tradeSelector";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
 
 interface AddTradeFormProps {
-    closeModal: () => void
+    onCloseModal: () => void
 }
 
 const calcPnLAndPercentage = (entryPrice: number, entryAmount: number, exits: Trade["exits"]): { pnl: number, returnPercent: number } => {
@@ -36,28 +37,32 @@ const calcPositionStatus = (entryAmount: number, exits: Trade["exits"]): Positio
     return totalAmountSold < entryAmount ? PositionStatus.Open : PositionStatus.Closed;
 }
 
-const defaultValuesForm: NewTradeFields = {
-    ticker: "",
-    entryPrice: 0,
-    entryDate: format(new Date(), "dd/MM/yyyy"),
-    sharesBought: 0,
-    exits: [{
+const getFormValues = (trade: Trade | null) => ({
+    ticker: trade?.ticker ?? "",
+    entryPrice: trade?.entryPrice ?? 0,
+    entryDate: trade?.entryDate ?? format(new Date(), "dd/MM/yyyy"),
+    sharesBought: trade?.sharesBought ?? 0,
+    exits: trade?.exits ?? [{
         price: 0,
         date: format(new Date(), "dd/MM/yyyy"),
         amount: 0,
     }],
-}
+})
 
-const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
-    const dispatch = useDispatch();
-    const saveTrade = useSaveTrade()
+const TradeForm: React.FC<AddTradeFormProps> = ({ onCloseModal }) => {
+    const saveTrade = useSaveTrade();
+
+    const editTradeId = useSelector(getEditTradeId)
+    const tradeToEdit = useSelector(getTradeById(editTradeId));
+
+    const formValues = getFormValues(tradeToEdit)
 
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm<NewTradeFields>({
-        defaultValues: defaultValuesForm,
+        defaultValues: formValues,
         resolver: (data, context, options) => {
             const schema = getSchema(data.entryDate);
             return yupResolver(schema)(data, context, options);
@@ -65,21 +70,18 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
     });
 
     const onSubmit = async (data: NewTradeFields) => {
-        // TODO: add id to exits
         console.log("Submitted:", data);
         const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.sharesBought, data.exits)
         const generatedData: Trade = {
             ...data,
-            id: uuidv4(),
+            id: tradeToEdit?.id || uuidv4(),
             outcome: pnl >= 0 ? Outcome.Winner : Outcome.Loser,
             pnl,
             returnPercent,
             status: calcPositionStatus(data.sharesBought, data.exits),
         }
-        const savedTrade = await saveTrade(generatedData);
-        console.log({ savedTrade })
-        dispatch(addTrade(generatedData));
-        closeModal();
+        await saveTrade(generatedData);
+        onCloseModal();
     };
 
     return (
@@ -87,7 +89,7 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <TradeFormEntryContainer control={control} errors={errors} />
-                    <TradeFormExitsContainer control={control} errors={errors["exits"]} />
+                    <TradeFormExitsContainer control={control} errors={errors["exits"]} exits={formValues.exits} />
                 </form>
             </LocalizationProvider>
         </Paper>
