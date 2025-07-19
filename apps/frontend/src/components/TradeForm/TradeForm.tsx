@@ -15,7 +15,7 @@ import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryCon
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
 
 interface AddTradeFormProps {
-    closeModal: () => void
+    onCloseModal: () => void
 }
 
 const calcPnLAndPercentage = (entryPrice: number, entryAmount: number, exits: Trade["exits"]): { pnl: number, returnPercent: number } => {
@@ -48,7 +48,7 @@ const defaultValuesForm: NewTradeFields = {
     }],
 }
 
-const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
+const TradeForm: React.FC<AddTradeFormProps> = ({ onCloseModal }) => {
     const dispatch = useDispatch();
     const saveTrade = useSaveTrade()
 
@@ -77,9 +77,8 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
             status: calcPositionStatus(data.sharesBought, data.exits),
         }
         const savedTrade = await saveTrade(generatedData);
-        console.log({ savedTrade })
         dispatch(addTrade(generatedData));
-        closeModal();
+        onCloseModal();
     };
 
     return (

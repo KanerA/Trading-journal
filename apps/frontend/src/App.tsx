@@ -7,20 +7,18 @@ import Header from './components/Header/Header'
 import { TradeModalTitles } from './enums/tradeModal'
 import { useGetAllTrades } from './hooks/useGetAllTrades'
 import MainPage from './pages/MainPage'
+import { openModal as openModalState } from './store/reducers/modalSlice'
 import { initTrades } from './store/reducers/tradesSlice'
 
 function App() {
   const { data } = useGetAllTrades();
   const dispatch = useDispatch();
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalTitle, setModalTitle] = useState<TradeModalTitles>(TradeModalTitles.CreateTrade)
   const openModal = (title: TradeModalTitles) => {
-    setIsModalOpen(true);
+    dispatch(openModalState())
     setModalTitle(title)
   }
-  const closeModal = () => setIsModalOpen(false)
-
 
   useEffect(() => {
     if (data) {
@@ -31,7 +29,7 @@ function App() {
     <Box sx={{ backgroundColor: "#eff4ff", minHeight: "100vh", padding: "1rem" }}>
       <Header openModal={openModal} />
       <MainPage />
-      <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} modalTitle={modalTitle} />
+      <AddTradeModal modalTitle={modalTitle} />
     </Box>
   )
 }

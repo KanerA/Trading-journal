@@ -1,21 +1,26 @@
 
 import { Dialog, DialogTitle } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal } from "../../store/reducers/modalSlice";
+import { getIsModalOpen } from "../../store/selectors/modalSelectors";
 import TradeForm from "../TradeForm/TradeForm";
 
 interface AddTradeModalProps {
-    closeModal: () => void;
-    isModalOpen: boolean;
     modalTitle: string
 }
 
-const AddTradeModal = ({ isModalOpen, closeModal, modalTitle }: AddTradeModalProps) => {
+const AddTradeModal = ({ modalTitle }: AddTradeModalProps) => {
+    const dispatch = useDispatch();
+
+    const isModalOpen = useSelector(getIsModalOpen);
+    const closeModalHandler = () => dispatch(closeModal())
 
     return (
         <Dialog scroll="paper"
             open={isModalOpen}
             onKeyDown={(evt) => {
                 evt.stopPropagation();
-                if (evt.key === "Escape") closeModal()
+                if (evt.key === "Escape") closeModalHandler()
             }}
             slotProps={{
                 paper: {
@@ -30,7 +35,7 @@ const AddTradeModal = ({ isModalOpen, closeModal, modalTitle }: AddTradeModalPro
             <DialogTitle sx={{ m: 0, paddingBottom: 0, fontSize: "2rem" }}>
                 {modalTitle}
             </DialogTitle>
-            <TradeForm closeModal={closeModal} />
+            <TradeForm onCloseModal={closeModalHandler} />
         </Dialog >
     );
 }
