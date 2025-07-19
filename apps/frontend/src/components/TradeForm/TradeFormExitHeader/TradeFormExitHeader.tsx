@@ -2,11 +2,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Box, Chip, IconButton } from "@mui/material";
 
 interface TradeFormExitHeaderProps {
-    index: number,
+    exitNumber: number,
     onClickDeleteExit: (index: number) => void
 }
 
-const TradeFormExitHeader = ({ index, onClickDeleteExit }: TradeFormExitHeaderProps) => {
+const TradeFormExitHeader = ({ exitNumber, onClickDeleteExit }: TradeFormExitHeaderProps) => {
 
     return (
         <Box sx={{
@@ -15,8 +15,8 @@ const TradeFormExitHeader = ({ index, onClickDeleteExit }: TradeFormExitHeaderPr
             alignItems: "center",
             padding: '1rem 2rem 1rem 2rem'
         }}>
-            <Chip variant="outlined" size="small" label={`Exit #${index}`} />
-            <IconButton sx={{ width: "3rem", padding: 0, borderRadius: 0 }} component="a" onClick={() => onClickDeleteExit(index)}>
+            <Chip variant="outlined" size="small" label={`Exit #${exitNumber}`} />
+            <IconButton sx={{ width: "3rem", padding: 0, borderRadius: 0 }} component="a" onClick={() => onClickDeleteExit(exitNumber - 1)}>
                 <DeleteOutlineIcon sx={{ width: "3rem", padding: 0 }} />
             </IconButton>
         </Box>

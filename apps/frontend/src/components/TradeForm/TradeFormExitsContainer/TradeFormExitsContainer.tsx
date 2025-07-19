@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
 import type { NewTradeFields } from '@trading-journal/shared';
+import { format } from 'date-fns';
 import { useFieldArray, type Control, type FieldErrors } from 'react-hook-form';
 import TradeFormExits from '../TradeFormExits/TradeFormExits';
 
@@ -15,15 +16,22 @@ const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerPro
         name: "exits"
     });
 
+    console.log({ fields })
+
     const addNewExitInput = () => {
         append({
             price: 0,
             amount: 0,
-            date: new Date().toDateString()
+            date: format(new Date().toDateString(), "dd/MM/yyy")
         })
     };
 
     const onClickDeleteExit = (index: number) => {
+        if (fields.length === 1) {
+            // TODO: Find better way
+            alert("Can't delete when only one exit.")
+            return
+        }
         remove(index)
     }
 

@@ -17,7 +17,7 @@ const TradeFormExits = ({ control, errors, exits, onClickDeleteExit }: AddTradeE
         <Paper elevation={2} sx={{ marginTop: "0.8rem" }}>
             {exits.map((exit, index) => (
                 <Box key={"field.id" + index}>
-                    <TradeFormExitHeader index={index + 1} onClickDeleteExit={onClickDeleteExit} />
+                    <TradeFormExitHeader exitNumber={index + 1} onClickDeleteExit={onClickDeleteExit} />
                     <TradeFormExit control={control} errors={errors} exit={exit} exitItemIndex={index} />
                 </Box>
             )
