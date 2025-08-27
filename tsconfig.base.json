@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    /* Language and module settings */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "DOM"],
+    "esModuleInterop": true,
+    "moduleDetection": "force",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Paths and references */
+    "baseUrl": ".",
+    "outDir": "dist",
+    "paths": {
+      "@trading-journal/shared": ["shared"],
+      "@trading-journal/shared/*": ["shared/*"]
+    },
+
+    /* Output and build settings */
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true, // Required for project references
+    "incremental": true,
+    "skipLibCheck": true,
+    "noEmit": false, // Individual apps may override this
+
+    /* Type safety */
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}
