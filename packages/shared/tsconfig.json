@@ -1,15 +1,12 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@trading-journal/shared": ["."]
-    },
-    "composite": true,
+    "outDir": "./dist",
+    "rootDir": ".",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "dist",
-    "rootDir": "."
+    "composite": true
   },
-  "include": ["."]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

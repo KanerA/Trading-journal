@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { Trade } from "@trading-journal/shared";
+import { type Trade } from "@trading-journal/shared";
 import { TradesService } from "./trades.service";
 
 @Controller("trades")

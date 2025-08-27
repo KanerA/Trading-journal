@@ -15,7 +15,7 @@ const tradesSlice = createSlice({
             if (indexToRemove === -1) return;
             state.splice(indexToRemove, 1);
         },
-        initTrades: (state, action) => action.payload
+        initTrades: (_, action) => action.payload
     }
 })
 

@@ -27,7 +27,7 @@
     "react-redux": "^9.2.0",
     "uuid": "^11.1.0",
     "yup": "^1.6.1",
-    "@trading-journal/shared": "workspace:*"
+    "@trading-journal/shared": "*"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
