@@ -21,7 +21,7 @@
     "@prisma/client": "^6.11.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "@trading-journal/shared": "*"
+    "@trading-journal/shared": "workspace:*"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

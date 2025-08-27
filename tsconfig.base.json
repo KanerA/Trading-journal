@@ -13,10 +13,6 @@
     /* Paths and references */
     "baseUrl": ".",
     "outDir": "dist",
-    "paths": {
-      "@trading-journal/shared": ["shared"],
-      "@trading-journal/shared/*": ["shared/*"]
-    },
 
     /* Output and build settings */
     "declaration": true,
