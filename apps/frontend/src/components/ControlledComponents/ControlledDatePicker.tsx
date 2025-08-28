@@ -1,6 +1,6 @@
 import { Box, FormLabel } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import type { NewTradeFields } from '@trading-journal/types
+import type { NewTradeFields } from '@trading-journal/types';
 import { format } from 'date-fns';
 import { Controller, type Control, type Path } from 'react-hook-form';
 
