@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 
+import { Trade } from "@trading-journal/shared";
 import { DatabaseRepository } from "../database/database.repository.js";
 
 @Injectable()
@@ -10,10 +11,10 @@ export class TradesRepository {
             include: {
                 exits: true,
             }
-        }) as unknown as any[]; //TODO: convert to Trade later
+        }) as unknown as Trade[];
     }
 
-    async saveTrade(trade: any) { //TODO: convert to Trade later
+    async saveTrade(trade: Trade) {
         return this.databaseRepository.trade.create({
             data: {
                 ...trade,
