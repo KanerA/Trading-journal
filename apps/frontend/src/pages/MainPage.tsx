@@ -1,8 +1,8 @@
 import { Box, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useLogin } from 'src/hooks/useLogin';
 import StatsGrid from '../components/StatsGrid/StatsGrid';
 import Tabs from '../components/Tabs/Tabs';
+import { useLogin } from '../hooks/useLogin';
 import { getAllTrades } from '../store/selectors/tradeSelector';
 
 export interface MainStats {
