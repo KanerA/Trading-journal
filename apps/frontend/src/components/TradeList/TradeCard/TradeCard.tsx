@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import type { Trade } from "@trading-journal/shared";
+import type { Trade } from "@trading-journal/types";
 import ExitPositionsDisplay from "../ExitPositionsDisplay/ExitPositionsDisplay";
 import TradeCardEntryData from "../TradeCardEntryData/TradeCardEntryData";
 import TradeCardHeader from "../TradeCardTitle/TradeCardHeader";

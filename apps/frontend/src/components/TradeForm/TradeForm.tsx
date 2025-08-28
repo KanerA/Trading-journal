@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Paper } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { Outcome, PositionStatus, type NewTradeFields, type Trade } from "@trading-journal/shared";
+import { Outcome, PositionStatus, type NewTradeFields, type Trade } from "@trading-journal/types";
 import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";

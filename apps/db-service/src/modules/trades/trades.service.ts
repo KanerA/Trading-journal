@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Trade } from "@trading-journal/shared";
+import { Trade } from "@trading-journal/types";
 import { TradesRepository } from "./trades.repository";
 
 @Injectable()

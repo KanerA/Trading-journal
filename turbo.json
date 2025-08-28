@@ -6,12 +6,12 @@
             "cache": false,
             "dependsOn": [
                 "@trading-journal/db-service#generate",
-                "@trading-journal/shared#build"
+                "@trading-journal/types#build"
             ]
         },
         "build": {
             "dependsOn": [
-                "@trading-journal/shared#build",
+                "@trading-journal/types#build",
                 "@trading-journal/db-service#generate"
             ],
             "outputs": [
@@ -22,7 +22,7 @@
         "@trading-journal/db-service#generate": {
             "outputs": []
         },
-        "@trading-journal/shared#build": {
+        "@trading-journal/types#build": {
             "outputs": [
                 "src/**"
             ]

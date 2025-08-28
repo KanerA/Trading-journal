@@ -17,7 +17,7 @@
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
-    "@trading-journal/shared": "*",
+    "@trading-journal/types": "*",
     "@types/axios": "^0.14.4",
     "axios": "^1.10.0",
     "reflect-metadata": "^0.2.2",

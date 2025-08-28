@@ -1,4 +1,4 @@
-import type { NewTradeFields, PositionExit } from "@trading-journal/shared";
+import type { NewTradeFields, PositionExit } from "@trading-journal/types";
 
 export const AddTradeEntryLabels: Record<keyof Omit<NewTradeFields, "exits">, string> = {
     ticker: "Stock Symbol",

@@ -1,5 +1,5 @@
 import { Box, FormLabel, TextField } from '@mui/material';
-import type { NewTradeFields } from "@trading-journal/shared";
+import type { NewTradeFields } from "@trading-journal/types";
 import { Controller, type Control, type Path } from 'react-hook-form';
 
 interface ControlledTextFieldProps {

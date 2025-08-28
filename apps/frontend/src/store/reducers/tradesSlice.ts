@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { Trade } from "@trading-journal/shared";
+import type { Trade } from "@trading-journal/types";
 
 const initialState: Trade[] = [];
 

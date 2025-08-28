@@ -1,6 +1,6 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
-import { Trade } from "@trading-journal/shared";
+import { Trade } from "@trading-journal/types";
 import { DbApiService } from "../../services/db-service/db-api.service";
 
 @Injectable()

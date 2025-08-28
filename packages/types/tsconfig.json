@@ -16,7 +16,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@trading-journal/shared/*": ["./src/*"]
+      "@trading-journal/types/*": ["./src/*"]
     }
   }
 }

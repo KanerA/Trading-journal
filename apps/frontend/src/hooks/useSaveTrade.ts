@@ -1,4 +1,4 @@
-import type { Trade } from "@trading-journal/shared";
+import type { Trade } from "@trading-journal/types";
 import { HttpMethod, useApiMutation } from "./useApi";
 
 export const useSaveTrade = (): (trade: Trade) => void => {

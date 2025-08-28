@@ -1,5 +1,5 @@
 import { Box, Paper } from "@mui/material";
-import type { NewTradeFields } from '@trading-journal/shared';
+import type { NewTradeFields } from '@trading-journal/types';
 import { type Control, type FieldErrors } from 'react-hook-form';
 import TradeFormExitHeader from "../TradeFormExitHeader/TradeFormExitHeader";
 import TradeFormExit from './TradeFormExit/TradeFormExit';
