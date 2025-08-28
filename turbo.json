@@ -2,17 +2,29 @@
     "$schema": "https://turbo.build/schema.json",
     "tasks": {
         "dev": {
+            "persistent": true,
+            "cache": false,
             "dependsOn": [
-                "^dev"
+                "@trading-journal/db-service#generate",
+                "@trading-journal/shared#build"
             ]
         },
         "build": {
             "dependsOn": [
-                "^build"
+                "@trading-journal/shared#build",
+                "@trading-journal/db-service#generate"
             ],
             "outputs": [
                 "dist/**",
                 "build/**"
+            ]
+        },
+        "@trading-journal/db-service#generate": {
+            "outputs": []
+        },
+        "@trading-journal/shared#build": {
+            "outputs": [
+                "src/**"
             ]
         }
     }

@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { type Trade } from "@trading-journal/shared";
 import { TradesService } from "./trades.service";
 
 @Controller("trades")
@@ -7,12 +6,12 @@ export class TradesController {
     constructor(private readonly tradesService: TradesService) { }
 
     @Get()
-    async getAllTrades(): Promise<Trade[]> {
+    async getAllTrades(): Promise<any[]> { //TODO: convert to Trade later
         return await this.tradesService.getAllTrades();
     }
 
     @Post()
-    async saveTrade(@Body() trade: Trade): Promise<any> {
+    async saveTrade(@Body() trade: any): Promise<any> {
         return await this.tradesService.saveTrade(trade);
     }
 

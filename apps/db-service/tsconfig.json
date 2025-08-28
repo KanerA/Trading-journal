@@ -1,21 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2021",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "lib": ["ES2021"],
+    "baseUrl": "./",
     "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "paths": {
-      "@trading-journal/shared": ["../../packages/shared/src"]
-    }
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"],
-  "references": [{ "path": "../../packages/shared" }]
+    "module": "node16",
+    "moduleResolution": "node16"
+  }
 }
