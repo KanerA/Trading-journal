@@ -1,5 +1,6 @@
 import { Box, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { useLogin } from 'src/hooks/useLogin';
 import StatsGrid from '../components/StatsGrid/StatsGrid';
 import Tabs from '../components/Tabs/Tabs';
 import { getAllTrades } from '../store/selectors/tradeSelector';
@@ -12,9 +13,12 @@ export interface MainStats {
 }
 
 const MainPage = () => {
-    const trades = useSelector(getAllTrades)
+    const trades = useSelector(getAllTrades);
+    const loginMutation = useLogin()
 
-    const onClick = () => { }
+    const onClick = () => {
+        loginMutation("john", "changeme")
+    }
     return (
         <Box>
             <Button variant="contained" color="primary" onClick={onClick}>
