@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 export type AuthMode = "login" | "register";
@@ -7,9 +7,10 @@ interface AuthFormProps {
     mode: AuthMode;
     toggleMode: () => void;
     onSubmit: (data: { email: string; password: string; name?: string }) => void;
+    isLoading: boolean;
 }
 
-const AuthForm = ({ mode, onSubmit, toggleMode }: AuthFormProps) => {
+const AuthForm = ({ mode, onSubmit, toggleMode, isLoading }: AuthFormProps) => {
 
     const [form, setForm] = useState({ email: "", password: "", name: "" });
 
@@ -76,7 +77,7 @@ const AuthForm = ({ mode, onSubmit, toggleMode }: AuthFormProps) => {
             />
 
             <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                {mode === "login" ? "Login" : "Register"}
+                {isLoading ? <CircularProgress color="info" size={25} /> : mode === "login" ? "Login" : "Register"}
             </Button>
 
             <Button onClick={() => {

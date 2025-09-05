@@ -8,7 +8,13 @@ import AuthForm, { AuthMode } from "./AuthForm";
 const Login: FC = () => {
     const [mode, setMode] = useState<AuthMode>("login");
     const navigate = useNavigate()
-    const loginMutation = useLogin();
+
+    const loginOnSuccess = (data: any) => {
+        console.log(data);
+        navigate("/");
+    }
+
+    const { mutate: mutateLogin, isPending } = useLogin({ onSuccess: loginOnSuccess });
     const signupMutation = useSignup();
 
     const onSubmitRegister = async (data: { email: string; password: string; name?: string }) => {
@@ -24,15 +30,15 @@ const Login: FC = () => {
     }
 
     const onSubmitLogin = async (data: { email: string; password: string }) => {
-        const response = await loginMutation(data);
-        console.log({ response })
+        // TODO: validate user inputs
+        mutateLogin(data);
     }
 
     const toggleMode = () => {
         setMode(mode === "login" ? "register" : "login");
     };
 
-    return <AuthForm mode={mode} toggleMode={toggleMode} onSubmit={mode === "login" ? onSubmitLogin : onSubmitRegister} />
+    return <AuthForm mode={mode} toggleMode={toggleMode} onSubmit={mode === "login" ? onSubmitLogin : onSubmitRegister} isLoading={isPending} />
 
 };
 
