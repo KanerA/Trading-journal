@@ -1,24 +1,30 @@
 
 import { Injectable } from '@nestjs/common';
+import { UsersDbApiService } from './users-db-api.service';
 
 export type User = any;
 
 @Injectable()
 export class UsersService {
+    constructor(private readonly usersDbAPiService: UsersDbApiService) { }
     private readonly users = [
         {
             userId: 1,
-            username: 'john',
+            email: 'assaf@gmail.com',
             password: 'changeme',
         },
         {
             userId: 2,
-            username: 'maria',
+            email: 'maris@gmail.com',
             password: 'guess',
         },
     ];
 
-    async findOne(username: string): Promise<User | undefined> {
-        return this.users.find(user => user.username === username);
+    async findOne(email: string): Promise<User | undefined> {
+        return this.users.find(user => user.email === email);
+    }
+
+    async createUser(data: { email: string; password: string; name: string }): Promise<void> {
+        await this.usersDbAPiService.createUser(data);
     }
 }

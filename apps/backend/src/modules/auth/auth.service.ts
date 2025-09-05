@@ -15,4 +15,13 @@ export class AuthService {
         console.log(result)
         return result;
     }
+
+    async validateEmail(email: string): Promise<boolean> {
+        const user = await this.usersService.findOne(email);
+        return !!user;
+    }
+
+    async createUser(data: { email: string; password: string; name: string }): Promise<void> {
+        return this.usersService.createUser(data);
+    }
 }
