@@ -20,7 +20,18 @@
             ]
         },
         "@trading-journal/db-service#generate": {
-            "outputs": []
+            "inputs": [
+                "prisma/schema.prisma",
+                "prisma/migrations/**",
+                "$TURBO_ROOT$/apps/db-service/package.json"
+            ],
+            "env": [
+                "DATABASE_URL"
+            ],
+            "outputs": [
+                "node_modules/@prisma/client/**",
+                "node_modules/.prisma/**"
+            ]
         },
         "@trading-journal/types#build": {
             "outputs": [

@@ -9,25 +9,27 @@ type Props = {
     trade: Trade;
 };
 
-const TradeCard = ({ trade }: Props) => (
-    <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '85vw',
-        margin: '0.7rem auto',
-        backgroundColor: "#fff",
-        padding: '1.3rem',
-        borderRadius: '15px',
-        border: '1px solid rgba(0,0,0,0.1)',
-    }}>
-        <TradeCardHeader tradeId={trade.id} ticker={trade.ticker} status={trade.status} outcome={trade.outcome} />
+const TradeCard = ({ trade }: Props) => {
+    return (
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '85vw',
+            margin: '0.7rem auto',
+            backgroundColor: "#fff",
+            padding: '1.3rem',
+            borderRadius: '15px',
+            border: '1px solid rgba(0,0,0,0.1)',
+        }}>
+            <TradeCardHeader tradeId={trade.id} ticker={trade.ticker} status={trade.status} outcome={trade.outcome} />
 
-        <TradeCardEntryData entryPrice={trade.entryPrice} entryDate={trade.entryDate} sharesBought={trade.sharesBought} />
+            <TradeCardEntryData entryPrice={trade.entryPrice} entryDate={trade.entryDate} sharesBought={trade.sharesBought} />
 
-        <ExitPositionsDisplay exits={trade.exits} />
+            <ExitPositionsDisplay exits={trade.exits} />
 
-        <TradeTotalDisplay pnl={trade.pnl} returnPercent={trade.returnPercent} />
-    </Box>
-);
+            <TradeTotalDisplay pnl={trade.pnl} returnPercent={trade.returnPercent} />
+        </Box>
+    )
+};
 
 export default TradeCard;
