@@ -24,7 +24,8 @@ const Login: FC = () => {
     }
 
     const onSubmitLogin = async (data: { email: string; password: string }) => {
-        const response = await loginMutation(data)
+        const response = await loginMutation(data);
+        console.log({ response })
     }
 
     const toggleMode = () => {

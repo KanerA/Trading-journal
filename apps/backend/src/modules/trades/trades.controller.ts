@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Req } from "@nestjs/common";
 import { Trade } from "@trading-journal/types";
+import { Request } from "express";
 import { TradesService } from "./trades.service";
 
 @Controller("trade")
 export class TradesController {
     constructor(private readonly tradeService: TradesService) { }
     @Get()
-    async getAllTrades(): Promise<any> {
+    async getAllTrades(@Req() req: Request): Promise<any> {
+        console.log(req.cookies["accessToken"]);
         return await this.tradeService.getAllTrades();
     }
 

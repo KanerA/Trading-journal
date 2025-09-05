@@ -2,11 +2,12 @@ import { Box } from '@mui/material'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 import Body from './Body'
+import { useGetAllTrades } from './hooks/useGetAllTrades'
 import Login from './pages/LoginPage'
 import MainPage from './pages/MainPage'
 
 function App() {
-
+  useGetAllTrades()
   return (
     <Box sx={{ backgroundColor: "#eff4ff", minHeight: "100vh", padding: "1rem" }}>
 
