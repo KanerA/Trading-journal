@@ -1,39 +1,26 @@
 import { Box } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
-import AddTradeModal from './components/AddTradeModal/AddTradeModal'
-import Header from './components/Header/Header'
-import { TradeModalTitles } from './enums/tradeModal'
-import { useGetAllTrades } from './hooks/useGetAllTrades'
+import Body from './Body'
+import Login from './pages/LoginPage'
 import MainPage from './pages/MainPage'
-import { initTrades } from './store/reducers/tradesSlice'
 
 function App() {
-  const { data } = useGetAllTrades();
-  const dispatch = useDispatch();
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalTitle, setModalTitle] = useState<TradeModalTitles>(TradeModalTitles.CreateTrade)
-  const openModal = (title: TradeModalTitles) => {
-    setIsModalOpen(true);
-    setModalTitle(title)
-  }
-  const closeModal = () => setIsModalOpen(false)
-
-
-  useEffect(() => {
-    if (data) {
-      dispatch(initTrades(data))
-    }
-  }, [data]);
   return (
     <Box sx={{ backgroundColor: "#eff4ff", minHeight: "100vh", padding: "1rem" }}>
-      <Header openModal={openModal} />
-      <MainPage />
-      <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} modalTitle={modalTitle} />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Body Component={MainPage} />} />
+          <Route path='*' element={<div>
+            404 NOT FOUND
+          </div>} />
+        </Routes>
+      </BrowserRouter>
     </Box>
   )
 }
 
-export default App
+export default App;
