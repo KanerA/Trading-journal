@@ -1,7 +1,7 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
-import { Trade } from "@trading-journal/shared";
-import { DbApiService } from "src/services/db-service/db-api.service";
+import { Trade } from "@trading-journal/types";
+import { DbApiService } from "../../services/db-service/db-api.service";
 
 @Injectable()
 export class TradesDbApiService {

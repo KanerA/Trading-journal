@@ -1,4 +1,4 @@
-import { Outcome, type Trade } from "@trading-journal/shared";
+import { Outcome, type Trade } from "@trading-journal/types";
 import type { RootState } from "../index.ts";
 
 const calcStats = (trades: Trade[]) => {

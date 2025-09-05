@@ -1,5 +1,5 @@
 import { Box, Divider } from "@mui/material";
-import type { Trade } from "@trading-journal/shared";
+import type { Trade } from "@trading-journal/types";
 import EntryDataItem from "../TradeCard/EntryDataItem";
 
 interface TradeCardEntryDataProps {

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import type { Trade } from '@trading-journal/shared';
+import type { Trade } from '@trading-journal/types';
 import NoTrades from '../NoTrades';
 import TradeCard from './TradeCard/TradeCard';
 

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import type { Trade } from "@trading-journal/shared";
+import type { Trade } from "@trading-journal/types";
 
 interface ExitPositionsDisplayProps {
     exits: Trade["exits"]

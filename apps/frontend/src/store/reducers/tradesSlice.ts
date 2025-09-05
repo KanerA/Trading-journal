@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { Trade } from "@trading-journal/shared";
+import type { Trade } from "@trading-journal/types";
 
 const initialState: Trade[] = [];
 
@@ -15,7 +15,7 @@ const tradesSlice = createSlice({
             if (indexToRemove === -1) return;
             state.splice(indexToRemove, 1);
         },
-        initTrades: (state, action) => action.payload
+        initTrades: (_, action) => action.payload
     }
 })
 

@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { DbApiModule } from "src/services/db-service/db-api.module";
+import { DbApiModule } from "../../services/db-service/db-api.module";
 import { TradesDbApiService } from "./trades-db-api.service";
 import { TradesController } from "./trades.controller";
 import { TradesService } from "./trades.service";

@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import type { NewTradeFields } from '@trading-journal/shared';
+import type { NewTradeFields } from '@trading-journal/types';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { type Control, type FieldErrors } from 'react-hook-form';

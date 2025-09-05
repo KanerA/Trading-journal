@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import StatsGrid from '../components/StatsGrid/StatsGrid.tsx';
-import Tabs from '../components/Tabs/Tabs.tsx';
-import { getAllTrades } from '../store/selectors/tradeSelector.ts';
+import StatsGrid from '../components/StatsGrid/StatsGrid';
+import Tabs from '../components/Tabs/Tabs';
+import { getAllTrades } from '../store/selectors/tradeSelector';
 
 export interface MainStats {
     totalPnL: number,

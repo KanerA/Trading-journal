@@ -3,14 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev:frontend": "pnpm --filter frontend dev",
-    "dev:backend": "pnpm --filter backend start:dev",
-    "dev:db-service": "pnpm --filter db-service start:dev",
-    "dev:all": "pnpm run dev:frontend & pnpm run dev:backend"
+    "dev": "turbo run dev",
+    "build": "turbo run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.12.3"
+  "packageManager": "npm@10.8.1",
+  "dependencies": {
+    "@trading-journal/types": "*"
+  },
+  "devDependencies": {
+    "tsconfig-paths": "^4.2.0",
+    "turbo": "^2.5.5"
+  }
 }

@@ -1,7 +1,7 @@
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Chip, IconButton, Typography } from "@mui/material";
-import type { Trade } from "@trading-journal/shared";
+import type { Trade } from "@trading-journal/types";
 import { useDispatch } from "react-redux";
 import { useDeleteTrade } from "../../../hooks/useDeleteTrade";
 import { removeTrade } from "../../../store/reducers/tradesSlice";
