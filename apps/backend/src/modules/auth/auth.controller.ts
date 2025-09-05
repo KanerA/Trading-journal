@@ -1,5 +1,6 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
 import { hash } from 'bcrypt';
+import { Response } from 'express';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -10,13 +11,11 @@ export class AuthController {
 
     @HttpCode(HttpStatus.OK)
     @Post('login')
-    async login(@Body() body: { username: string; password: string }) {
-        const user = await this.authService.validateUser(body.username, body.password);
-        if (!user) {
-            return { message: 'Invalid credentials' };
-        }
+    async login(@Res({ passthrough: true }) res: Response, @Body() body: { email: string; password: string }) {
+        const { user, accessToken, refreshToken } = await this.authService.loginUser(body);
+        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, maxAge: 15 * 60 * 1000 });
+        res.cookie('accessToken', accessToken, { httpOnly: true, secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
         return user;
-
     }
 
     @Post('signup')

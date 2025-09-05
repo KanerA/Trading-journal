@@ -10,5 +10,11 @@ export class UsersDbApiService {
         await this.dbApiService.requestWithData(this.httpService.post("/users", data));
     }
 
+    async loginUser(email: string): Promise<any> {
+        return await this.dbApiService.requestWithData(this.httpService.post("/users/login", { email }));
+    }
 
+    async validateEmail(email: string): Promise<boolean> {
+        return await this.dbApiService.requestWithData(this.httpService.get(`/users/validate-email?email=${email}`));
+    }
 }

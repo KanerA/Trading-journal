@@ -11,4 +11,11 @@ export class UsersService {
     async createUser(user: any) {
         return await this.usersRepository.createUser(user);
     }
+    async loginUser(email: string) {
+        return await this.usersRepository.loginUser(email);
+    }
+
+    async validateEmail(email: string): Promise<boolean> {
+        return await this.usersRepository.validateEmail(email);
+    }
 }

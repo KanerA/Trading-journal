@@ -20,8 +20,16 @@ export class UsersService {
         },
     ];
 
+    async login(email: string) {
+        return await this.usersDbAPiService.loginUser(email);
+    }
+
     async findOne(email: string): Promise<User | undefined> {
         return this.users.find(user => user.email === email);
+    }
+
+    async validateEmail(email: string): Promise<boolean> {
+        return await this.usersDbAPiService.validateEmail(email);
     }
 
     async createUser(data: { email: string; password: string; name: string }): Promise<void> {

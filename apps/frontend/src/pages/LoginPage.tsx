@@ -23,8 +23,8 @@ const Login: FC = () => {
         }
     }
 
-    const onSubmitLogin = (data: { email: string; password: string }) => {
-        console.log("loginData", data)
+    const onSubmitLogin = async (data: { email: string; password: string }) => {
+        const response = await loginMutation(data)
     }
 
     const toggleMode = () => {

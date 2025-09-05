@@ -18,4 +18,13 @@ export class UsersRepository {
             throw error;
         }
     }
+
+    async loginUser(email: string) {
+        return await this.databaseRepository.user.findUnique({ where: { email } });
+    }
+
+    async validateEmail(email: string): Promise<boolean> {
+        const user = await this.databaseRepository.user.findUnique({ where: { email } });
+        return !!user;
+    }
 }
