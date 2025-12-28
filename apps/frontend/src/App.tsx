@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import './App.css'
 import AddTradeModal from './components/AddTradeModal/AddTradeModal'
 import Header from './components/Header/Header'
-import { TradeModalTitles } from './enums/tradeModal'
 import { useGetAllTrades } from './hooks/useGetAllTrades'
 import MainPage from './pages/MainPage'
 import { initTrades } from './store/reducers/tradesSlice'
@@ -14,8 +13,8 @@ function App() {
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalTitle, setModalTitle] = useState<TradeModalTitles>(TradeModalTitles.CreateTrade)
-  const openModal = (title: TradeModalTitles) => {
+  const [modalTitle, setModalTitle] = useState<string>("")
+  const openModal = (title: string) => {
     setIsModalOpen(true);
     setModalTitle(title)
   }

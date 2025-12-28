@@ -1,8 +1,7 @@
 import { Box, Button, Card, Typography } from "@mui/material";
-import { TradeModalTitles } from "../../enums/tradeModal";
 
 interface HeaderProps {
-    openModal: (modalTitle: TradeModalTitles) => void;
+    openModal: (modalTitle: string) => void;
 }
 
 export default function Header({ openModal }: HeaderProps) {
@@ -28,7 +27,7 @@ export default function Header({ openModal }: HeaderProps) {
                     <Typography>Track and analyze your stock trades</Typography>
                 </Box>
             </Box>
-            <Button variant="contained" onClick={() => openModal(TradeModalTitles.CreateTrade)}>
+            <Button variant="contained" onClick={() => openModal("Create New Trade")}>
                 + Add New Trade
             </Button>
         </Card>

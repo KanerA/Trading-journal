@@ -18,6 +18,12 @@ export const getSchema = (entryDateValue: string) => yup.object().shape({
     entryPrice: yup.number().required("Entry price is required").moreThan(0, "Entry price must be a positive number"),
     sharesBought: yup.number().required("Entry amount is required").integer("Must be a whole number").moreThan(0, "Entry amount must be a positive number"),
     ticker: yup.string().required("Ticker is required").min(3, "Ticker must be at least 3 character long"),
-    exits: yup.array().of(getPositionExitSchema(entryDateValue)).min(1, "At least one exit is required").required("Exits are required"),
+    exits: yup.array().of(getPositionExitSchema(entryDateValue)).min(1, "At least one exit is required").required("Exits are required").test("exits-dont-exceed-shares", "Total exit amount cannot exceed shares bought", function (exits) {
+        // TODO: check why error doesn't show 
+        const { sharesBought } = this.parent;
+        if (!sharesBought || !exits) return true;
+        const totalSharesSold = exits.reduce((prev, curr) => prev + (curr.amount || 0), 0);
+        return totalSharesSold <= sharesBought
+    }),
 });
 
