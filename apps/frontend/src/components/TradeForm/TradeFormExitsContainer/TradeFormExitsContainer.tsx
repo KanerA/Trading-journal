@@ -1,8 +1,8 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
 import type { NewTradeFields } from '@trading-journal/types';
 import { format } from 'date-fns';
 import { useState } from 'react';
-import { type Control, type FieldErrors } from 'react-hook-form';
+import { type Control, type FieldErrors, useWatch } from 'react-hook-form';
 import TradeFormExits from '../TradeFormExits/TradeFormExits';
 
 interface TradeFormExitsContainerProps {
@@ -18,8 +18,28 @@ const defaultExit = {
 
 const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerProps) => {
     const [exitsInputs, setExitsInputs] = useState<NewTradeFields["exits"]>([defaultExit]);
+    const [pendingDeleteIndex, setPendingDeleteIndex] = useState<number | null>(null);
+    const watchedExits = useWatch({ control, name: "exits" });
 
     const addNewExitInput = () => setExitsInputs([...exitsInputs, defaultExit]);
+
+    const handleDeleteClick = (index: number) => {
+        const exit = watchedExits?.[index];
+        if (exit && (exit.price !== 0 || exit.amount !== 0)) {
+            setPendingDeleteIndex(index);
+        } else {
+            setExitsInputs(exitsInputs.filter((_, i) => i !== index));
+        }
+    };
+
+    const confirmDelete = () => {
+        if (pendingDeleteIndex !== null) {
+            setExitsInputs(exitsInputs.filter((_, i) => i !== pendingDeleteIndex));
+        }
+        setPendingDeleteIndex(null);
+    };
+
+    const cancelDelete = () => setPendingDeleteIndex(null);
 
     return (
         <Box>
@@ -32,13 +52,26 @@ const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerPro
                 </Button>
             </Box>
 
-            <TradeFormExits control={control} errors={errors} exits={exitsInputs} />
+            <TradeFormExits control={control} errors={errors} exits={exitsInputs} onDelete={handleDeleteClick} />
 
             <Box>
                 <Button type="submit" variant="contained">
                     Submit Trade
                 </Button>
             </Box>
+
+            <Dialog open={pendingDeleteIndex !== null} onClose={cancelDelete}>
+                <DialogTitle>Delete Exit?</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        This exit has data that will be lost. Are you sure?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="outlined" onClick={cancelDelete}>Cancel</Button>
+                    <Button variant="contained" color="error" onClick={confirmDelete}>Delete</Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     );
 };

@@ -3,9 +3,10 @@ import { TradeModalTitles } from "../../enums/tradeModal";
 
 interface HeaderProps {
     openModal: (modalTitle: TradeModalTitles) => void;
+    onLogout: () => void;
 }
 
-export default function Header({ openModal }: HeaderProps) {
+export default function Header({ openModal, onLogout }: HeaderProps) {
     return (
         <Card
             sx={{
@@ -28,9 +29,14 @@ export default function Header({ openModal }: HeaderProps) {
                     <Typography>Track and analyze your stock trades</Typography>
                 </Box>
             </Box>
-            <Button variant="contained" onClick={() => openModal(TradeModalTitles.CreateTrade)}>
-                + Add New Trade
-            </Button>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Button variant="text" color="inherit" onClick={onLogout}>
+                    Logout
+                </Button>
+                <Button variant="contained" onClick={() => openModal(TradeModalTitles.CreateTrade)}>
+                    + Add New Trade
+                </Button>
+            </Box>
         </Card>
     )
 }

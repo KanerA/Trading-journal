@@ -8,19 +8,18 @@ interface AddTradeExitProps {
     control: Control<NewTradeFields>
     errors: FieldErrors<NewTradeFields>["exits"],
     exits: NewTradeFields["exits"]
+    onDelete: (index: number) => void
 }
 
-const TradeFormExits = ({ control, errors, exits }: AddTradeExitProps) => {
+const TradeFormExits = ({ control, errors, exits, onDelete }: AddTradeExitProps) => {
     return (
         <Paper elevation={2} sx={{ marginTop: "0.8rem" }}>
             {exits.map((exit, index) => (
                 <Box key={"field.id" + index}>
-                    <TradeFormExitHeader number={index + 1} />
+                    <TradeFormExitHeader number={index + 1} onDelete={() => onDelete(index)} />
                     <TradeFormExit control={control} errors={errors} exit={exit} exitItemIndex={index} />
                 </Box>
-            )
-            )}
-
+            ))}
         </Paper>
     );
 };

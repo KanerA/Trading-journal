@@ -1,39 +1,43 @@
 import { Box } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router'
 import './App.css'
-import AddTradeModal from './components/AddTradeModal/AddTradeModal'
-import Header from './components/Header/Header'
-import { TradeModalTitles } from './enums/tradeModal'
+import { AuthProvider, useAuth } from './authentication/useAuth'
+import ProtectedRoute from './components/ProtectedRoute'
 import { useGetAllTrades } from './hooks/useGetAllTrades'
+import Login from './pages/LoginPage'
 import MainPage from './pages/MainPage'
-import { initTrades } from './store/reducers/tradesSlice'
+
+const PublicRoute = () => {
+  const { isAuthenticated, isLoading } = useAuth();
+  if (isLoading) return null;
+  if (isAuthenticated) return <Navigate to="/" replace />;
+  return <Outlet />;
+};
 
 function App() {
-  const { data } = useGetAllTrades();
-  const dispatch = useDispatch();
-
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalTitle, setModalTitle] = useState<TradeModalTitles>(TradeModalTitles.CreateTrade)
-  const openModal = (title: TradeModalTitles) => {
-    setIsModalOpen(true);
-    setModalTitle(title)
-  }
-  const closeModal = () => setIsModalOpen(false)
-
-
-  useEffect(() => {
-    if (data) {
-      dispatch(initTrades(data))
-    }
-  }, [data]);
+  useGetAllTrades()
   return (
     <Box sx={{ backgroundColor: "#eff4ff", minHeight: "100vh", padding: "1rem" }}>
-      <Header openModal={openModal} />
-      <MainPage />
-      <AddTradeModal closeModal={closeModal} isModalOpen={isModalOpen} modalTitle={modalTitle} />
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public Routes */}
+            <Route element={<PublicRoute />}>
+              <Route path="/login" element={<Login />} />
+            </Route>
+
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/" element={<MainPage />} />
+            </Route>
+
+            {/* Fallback Route */}
+            <Route path="*" element={<h1>404 Not Found</h1>} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </Box>
   )
 }
 
-export default App
+export default App;
