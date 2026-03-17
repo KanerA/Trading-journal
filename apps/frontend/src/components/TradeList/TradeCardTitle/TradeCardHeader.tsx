@@ -11,6 +11,8 @@ interface TradeCardHeaderProps {
     ticker: Trade["ticker"],
     status: Trade["status"],
     outcome: Trade["outcome"],
+    hasExits: boolean,
+    onEditTrade: () => void,
 }
 
 // TODO: create const for win / lose colors : rgb(247, 0, 0), rgb(2, 176, 2)
@@ -22,7 +24,7 @@ const sharedChipSx = {
     fontSize: "0.8rem",
 }
 
-const TradeCardHeader = ({ tradeId, outcome, status, ticker }: TradeCardHeaderProps) => {
+const TradeCardHeader = ({ tradeId, outcome, status, ticker, hasExits, onEditTrade }: TradeCardHeaderProps) => {
     const dispatch = useDispatch();
     const mutateDeleteTrade = useDeleteTrade();
     return (
@@ -36,10 +38,10 @@ const TradeCardHeader = ({ tradeId, outcome, status, ticker }: TradeCardHeaderPr
             }}>
                 <Typography variant="h5" sx={{ fontWeight: "bold" }}>{ticker}</Typography>
                 <Chip size="small" variant="outlined" label={status} sx={sharedChipSx} />
-                <Chip size="small" variant="outlined" label={outcome} sx={{ ...sharedChipSx, backgroundColor: outcome === "winner" ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)", fontWeight: 600 }} />
+                {hasExits && <Chip size="small" variant="outlined" label={outcome} sx={{ ...sharedChipSx, backgroundColor: outcome === "winner" ? "rgb(2, 176, 2)" : "rgb(247, 0, 0)", fontWeight: 600 }} />}
             </Box>
             <Box>
-                <IconButton><EditIcon sx={{ color: "black" }} /></IconButton>
+                <IconButton onClick={onEditTrade}><EditIcon sx={{ color: "black" }} /></IconButton>
                 <IconButton><DeleteOutlineIcon sx={{ color: "black" }} onClick={() => {
                     dispatch(removeTrade(tradeId));
                     mutateDeleteTrade(tradeId)

@@ -7,9 +7,10 @@ import TradeTotalDisplay from "../TradeTotalsDisplay/TradeTotalsDisplay";
 
 type Props = {
     trade: Trade;
+    onEditTrade: (trade: Trade) => void;
 };
 
-const TradeCard = ({ trade }: Props) => {
+const TradeCard = ({ trade, onEditTrade }: Props) => {
     return (
         <Box sx={{
             display: 'flex',
@@ -21,7 +22,7 @@ const TradeCard = ({ trade }: Props) => {
             borderRadius: '15px',
             border: '1px solid rgba(0,0,0,0.1)',
         }}>
-            <TradeCardHeader tradeId={trade.id} ticker={trade.ticker} status={trade.status} outcome={trade.outcome} />
+            <TradeCardHeader tradeId={trade.id} ticker={trade.ticker} status={trade.status} outcome={trade.outcome} hasExits={trade.exits.length > 0} onEditTrade={() => onEditTrade(trade)} />
 
             <TradeCardEntryData entryPrice={trade.entryPrice} entryDate={trade.entryDate} sharesBought={trade.sharesBought} />
 

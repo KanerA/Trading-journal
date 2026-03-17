@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, Typography } from '@mui/material';
 import type { NewTradeFields } from '@trading-journal/types';
 import { format } from 'date-fns';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import TradeFormExits from '../TradeFormExits/TradeFormExits';
 interface TradeFormExitsContainerProps {
     control: Control<NewTradeFields>
     errors: FieldErrors<NewTradeFields>["exits"]
+    initialExits?: NewTradeFields["exits"]
 }
 
 const defaultExit = {
@@ -16,8 +17,8 @@ const defaultExit = {
     amount: 0,
 };
 
-const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerProps) => {
-    const [exitsInputs, setExitsInputs] = useState<NewTradeFields["exits"]>([defaultExit]);
+const TradeFormExitsContainer = ({ control, errors, initialExits }: TradeFormExitsContainerProps) => {
+    const [exitsInputs, setExitsInputs] = useState<NewTradeFields["exits"]>(initialExits ?? [defaultExit]);
     const [pendingDeleteIndex, setPendingDeleteIndex] = useState<number | null>(null);
     const watchedExits = useWatch({ control, name: "exits" });
 
@@ -52,7 +53,13 @@ const TradeFormExitsContainer = ({ control, errors }: TradeFormExitsContainerPro
                 </Button>
             </Box>
 
-            <TradeFormExits control={control} errors={errors} exits={exitsInputs} onDelete={handleDeleteClick} />
+            {exitsInputs.length === 0 ? (
+                <Paper elevation={2} sx={{ marginTop: "0.8rem", padding: "1.5rem 2rem", color: "text.secondary" }}>
+                    <Typography variant="body2">No exits added — trade will be saved as <strong>Open</strong>.</Typography>
+                </Paper>
+            ) : (
+                <TradeFormExits control={control} errors={errors} exits={exitsInputs} onDelete={handleDeleteClick} />
+            )}
 
             <Box>
                 <Button type="submit" variant="contained">

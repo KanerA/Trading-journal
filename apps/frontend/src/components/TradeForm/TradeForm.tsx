@@ -10,21 +10,22 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { getSchema } from "../../formValidation/yupSchema";
 import { useSaveTrade } from "../../hooks/useSaveTrade";
-import { addTrade } from "../../store/reducers/tradesSlice";
+import { useUpdateTrade } from "../../hooks/useUpdateTrade";
+import { addTrade, updateTrade } from "../../store/reducers/tradesSlice";
 import TradeFormEntryContainer from "./TradeFormEntryContainer/TradeFormEntryContainer";
 import TradeFormExitsContainer from "./TradeFormExitsContainer/TradeFormExitsContainer";
 
-interface AddTradeFormProps {
-    closeModal: () => void
+interface TradeFormProps {
+    closeModal: () => void;
+    tradeToEdit?: Trade;
 }
 
 const calcPnLAndPercentage = (entryPrice: number, entryAmount: number, exits: Trade["exits"]): { pnl: number, returnPercent: number } => {
     const totalBought = entryPrice * entryAmount;
     const totalSold = exits.reduce((acc, curr) => {
         acc += curr.amount * curr.price;
-        return acc
+        return acc;
     }, 0);
-
     return { pnl: (totalSold - totalBought), returnPercent: ((totalSold - totalBought) / totalBought) * 100 };
 }
 
@@ -48,16 +49,22 @@ const defaultValuesForm: NewTradeFields = {
     }],
 }
 
-const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
+const TradeForm: React.FC<TradeFormProps> = ({ closeModal, tradeToEdit }) => {
     const dispatch = useDispatch();
-    const saveTrade = useSaveTrade()
+    const saveTrade = useSaveTrade();
+    const updateTradeApi = useUpdateTrade();
+
+    const defaultValues: NewTradeFields = tradeToEdit
+        ? { ticker: tradeToEdit.ticker, entryPrice: tradeToEdit.entryPrice, entryDate: tradeToEdit.entryDate, sharesBought: tradeToEdit.sharesBought, exits: tradeToEdit.exits }
+        : defaultValuesForm;
 
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm<NewTradeFields>({
-        defaultValues: defaultValuesForm,
+        defaultValues,
+        shouldUnregister: true,
         resolver: (data, context, options) => {
             const schema = getSchema(data.entryDate);
             return yupResolver(schema)(data, context, options);
@@ -65,29 +72,38 @@ const TradeForm: React.FC<AddTradeFormProps> = ({ closeModal }) => {
     });
 
     const onSubmit = async (data: NewTradeFields) => {
-        // TODO: add id to exits
-        console.log("Submitted:", data);
-        const { pnl, returnPercent } = calcPnLAndPercentage(data.entryPrice, data.sharesBought, data.exits)
-        const generatedData: Trade = {
+        const exits = data.exits ?? [];
+        const { pnl, returnPercent } = exits.length > 0
+            ? calcPnLAndPercentage(data.entryPrice, data.sharesBought, exits)
+            : { pnl: 0, returnPercent: 0 };
+
+        const tradeData: Trade = {
             ...data,
-            id: uuidv4(),
+            exits,
+            id: tradeToEdit?.id ?? uuidv4(),
             outcome: pnl >= 0 ? Outcome.Winner : Outcome.Loser,
             pnl,
             returnPercent,
-            status: calcPositionStatus(data.sharesBought, data.exits),
+            status: calcPositionStatus(data.sharesBought, exits),
+        };
+
+        if (tradeToEdit) {
+            await updateTradeApi(tradeData);
+            dispatch(updateTrade(tradeData));
+        } else {
+            await saveTrade(tradeData);
+            dispatch(addTrade(tradeData));
         }
-        const savedTrade = await saveTrade(generatedData);
-        console.log({ savedTrade })
-        dispatch(addTrade(generatedData));
+
         closeModal();
     };
 
     return (
-        <Paper elevation={0} sx={{ p: 3, }} square>
+        <Paper elevation={0} sx={{ p: 3 }} square>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <form onSubmit={handleSubmit(onSubmit)} >
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <TradeFormEntryContainer control={control} errors={errors} />
-                    <TradeFormExitsContainer control={control} errors={errors["exits"]} />
+                    <TradeFormExitsContainer control={control} errors={errors["exits"]} initialExits={defaultValues.exits} />
                 </form>
             </LocalizationProvider>
         </Paper>

@@ -1,21 +1,22 @@
-
 import { Dialog, DialogTitle } from "@mui/material";
+import type { Trade } from "@trading-journal/types";
 import TradeForm from "../TradeForm/TradeForm";
 
-interface AddTradeModalProps {
+interface TradeModalProps {
     closeModal: () => void;
     isModalOpen: boolean;
-    modalTitle: string
+    modalTitle: string;
+    tradeToEdit?: Trade;
 }
 
-const AddTradeModal = ({ isModalOpen, closeModal, modalTitle }: AddTradeModalProps) => {
-
+const TradeModal = ({ isModalOpen, closeModal, modalTitle, tradeToEdit }: TradeModalProps) => {
     return (
-        <Dialog scroll="paper"
+        <Dialog
+            scroll="paper"
             open={isModalOpen}
             onKeyDown={(evt) => {
                 evt.stopPropagation();
-                if (evt.key === "Escape") closeModal()
+                if (evt.key === "Escape") closeModal();
             }}
             slotProps={{
                 paper: {
@@ -30,10 +31,9 @@ const AddTradeModal = ({ isModalOpen, closeModal, modalTitle }: AddTradeModalPro
             <DialogTitle sx={{ m: 0, paddingBottom: 0, fontSize: "2rem" }}>
                 {modalTitle}
             </DialogTitle>
-            <TradeForm closeModal={closeModal} />
-        </Dialog >
+            <TradeForm key={tradeToEdit?.id ?? 'new'} closeModal={closeModal} tradeToEdit={tradeToEdit} />
+        </Dialog>
     );
 }
-export default AddTradeModal;
 
-
+export default TradeModal;

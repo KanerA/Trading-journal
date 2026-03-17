@@ -7,6 +7,7 @@ import TabsButton from "./TabsButton";
 
 interface TabsProps {
     trades: Trade[]
+    onEditTrade: (trade: Trade) => void
 }
 
 enum TabsOptions {
@@ -14,7 +15,7 @@ enum TabsOptions {
     analytics = "Analytics"
 }
 
-const Tabs = ({ trades }: TabsProps) => {
+const Tabs = ({ trades, onEditTrade }: TabsProps) => {
     const [displaySectionSelector, setDisplaySectionSelector] = useState<TabsOptions>(TabsOptions.trades);
 
     return (
@@ -30,7 +31,7 @@ const Tabs = ({ trades }: TabsProps) => {
                 <TabsButton label={"Trades"} onClick={() => setDisplaySectionSelector(TabsOptions.trades)} variant={`${displaySectionSelector === TabsOptions.trades ? "contained" : "outlined"}`} />
                 <TabsButton label={"Analytics"} onClick={() => setDisplaySectionSelector(TabsOptions.analytics)} variant={`${displaySectionSelector === TabsOptions.analytics ? "contained" : "outlined"}`} />
             </Box>
-            {displaySectionSelector === TabsOptions.trades && <TradeList trades={trades} />}
+            {displaySectionSelector === TabsOptions.trades && <TradeList trades={trades} onEditTrade={onEditTrade} />}
             {displaySectionSelector === TabsOptions.analytics && <EmptyState />}
         </Box>
     );
