@@ -2,37 +2,30 @@
 import { Injectable } from '@nestjs/common';
 import { UsersDbApiService } from './users-db-api.service';
 
-export type User = any;
+export type User = {
+    id: string,
+    email: string,
+    name: string,
+    password: string
+}
 
 @Injectable()
 export class UsersService {
     constructor(private readonly usersDbAPiService: UsersDbApiService) { }
-    private readonly users = [
-        {
-            userId: 1,
-            email: 'assaf@gmail.com',
-            password: 'changeme',
-        },
-        {
-            userId: 2,
-            email: 'maris@gmail.com',
-            password: 'guess',
-        },
-    ];
 
-    async login(email: string) {
+    async login(email: string): Promise<User> {
         return await this.usersDbAPiService.loginUser(email);
-    }
-
-    async findOne(email: string): Promise<User | undefined> {
-        return this.users.find(user => user.email === email);
     }
 
     async validateEmail(email: string): Promise<boolean> {
         return await this.usersDbAPiService.validateEmail(email);
     }
 
-    async createUser(data: { email: string; password: string; name: string }): Promise<void> {
-        await this.usersDbAPiService.createUser(data);
+    async getUserById(id: string): Promise<User | null> {
+        return await this.usersDbAPiService.getUserById(id);
+    }
+
+    async createUser(data: { email: string; password: string; name: string }): Promise<User> {
+        return await this.usersDbAPiService.createUser(data);
     }
 }
