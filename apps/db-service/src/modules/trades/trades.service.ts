@@ -8,12 +8,12 @@ export class TradesService {
         private readonly tradesRepository: TradesRepository
     ) { }
 
-    async getAllTrades() {
-        return this.tradesRepository.getAllTrades();
+    async getAllTrades(userId: string) {
+        return this.tradesRepository.getAllTrades(userId);
     }
 
-    async saveTrade(trade: Trade) {
-        return this.tradesRepository.saveTrade(trade);
+    async saveTrade(trade: Trade, userId: string) {
+        return this.tradesRepository.saveTrade(trade, userId);
     }
 
     async deleteTrade(tradeId: string) {
