@@ -3,9 +3,10 @@ import { Box, Chip, IconButton } from "@mui/material";
 
 interface TradeFormExitHeaderProps {
     number: number
+    onDelete: () => void
 }
 
-const TradeFormExitHeader = ({ number }: TradeFormExitHeaderProps) => {
+const TradeFormExitHeader = ({ number, onDelete }: TradeFormExitHeaderProps) => {
     return (
         <Box sx={{
             display: "flex",
@@ -14,7 +15,7 @@ const TradeFormExitHeader = ({ number }: TradeFormExitHeaderProps) => {
             padding: '1rem 2rem 1rem 2rem'
         }}>
             <Chip variant="outlined" size="small" label={`Exit #${number}`} />
-            <IconButton sx={{ width: "3rem", padding: 0, borderRadius: 0 }} component="a" onClick={() => alert("HELLO " + number)}>
+            <IconButton sx={{ width: "3rem", padding: 0, borderRadius: 0 }} onClick={onDelete}>
                 <DeleteOutlineIcon sx={{ width: "3rem", padding: 0 }} />
             </IconButton>
         </Box>
