@@ -7,12 +7,12 @@ import { DbApiService } from "../../services/db-service/db-api.service";
 export class TradesDbApiService {
     constructor(private readonly dbApiService: DbApiService, private readonly httpService: HttpService) { }
 
-    async getAllTrades(): Promise<Trade[]> {
-        return await this.dbApiService.requestWithData(this.httpService.get("/trades"))
+    async getAllTrades(userId: string): Promise<Trade[]> {
+        return await this.dbApiService.requestWithData(this.httpService.get(`/trades?userId=${userId}`));
     }
 
-    async saveTrade(trade: Trade): Promise<void> {
-        return await this.dbApiService.requestWithData(this.httpService.post("/trades", trade));
+    async saveTrade(trade: Trade, userId: string): Promise<void> {
+        return await this.dbApiService.requestWithData(this.httpService.post("/trades", { ...trade, userId }));
     }
 
     async deleteTrade(tradeId: string): Promise<void> {

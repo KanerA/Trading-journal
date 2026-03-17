@@ -5,12 +5,13 @@ import { TradesDbApiService } from "./trades-db-api.service";
 @Injectable()
 export class TradesService {
     constructor(private readonly tradesDbApiService: TradesDbApiService) { }
-    async getAllTrades(): Promise<Trade[]> {
-        return await this.tradesDbApiService.getAllTrades();
+
+    async getAllTrades(userId: string): Promise<Trade[]> {
+        return await this.tradesDbApiService.getAllTrades(userId);
     }
 
-    async saveTrade(trade: Trade): Promise<void> {
-        return await this.tradesDbApiService.saveTrade(trade);
+    async saveTrade(trade: Trade, userId: string): Promise<void> {
+        return await this.tradesDbApiService.saveTrade(trade, userId);
     }
 
     async deleteTrade(tradeId: string): Promise<void> {
